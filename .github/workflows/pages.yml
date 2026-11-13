@@ -29,6 +29,8 @@ jobs:
       - run: npm test
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
+      # De testbuild kent de publieke testsleutel; de privésleutel mag er niet in staan.
+      - run: npx tsx scripts/controleer-build.ts dist-e2e
 
   bouwen:
     needs: testen

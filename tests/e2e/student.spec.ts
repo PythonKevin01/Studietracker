@@ -34,7 +34,7 @@ async function begin(page: Page) {
   await expect(page.getByRole('heading', { name: 'Wat is je studentnummer?' })).toBeVisible();
   await page.getByLabel('Studentnummer').fill(STUDENT.toLowerCase());
   await page.getByRole('button', { name: 'Beginnen' }).click();
-  await expect(page.getByRole('heading', { name: 'Hoe ver ben ik?' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Wat kan ik al?' })).toBeVisible();
 }
 
 async function plak(page: Page, tekst: string) {
@@ -50,13 +50,18 @@ test('student: van eerste start tot back-up terugzetten', async ({ page }) => {
   await toegankelijk(page);
   await begin(page);
   await expect(page.getByText('Dit is een ontwikkeloverzicht, geen examinering.')).toBeVisible();
-  await expect(page.getByText(`studentnummer ${STUDENT}`)).toBeVisible();
+  await expect(page.getByRole('heading', { name: `Studentnummer ${STUDENT}` })).toBeVisible();
   await expect(page.getByText('0 van de 43 leerdoelen behaald')).toBeVisible();
   await toegankelijk(page);
 
-  // Totaaloverzicht: alle jaren, jaar 1 open
-  await expect(page.getByText('Jaar 1', { exact: true })).toBeVisible();
+  // Overzicht: vaardighedenboom, questlog van periode 1 en de reis door alle jaren
+  await expect(page.getByRole('button', { name: /^LD03 Auteursrecht ?: nog niet gestart, behaald in 0 van 2 cursussen$/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Periode 1: 9 cursussen' })).toBeVisible();
   await expect(page.getByText('Jaar 3', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: /^LD03 Auteursrecht/ }).click();
+  await expect(page.getByRole('heading', { name: 'Heeft kennis van auteursrecht, licenties en ethische richtlijnen' })).toBeFocused();
+  await page.getByRole('button', { name: /Terug naar periode 1/ }).click();
+  await expect(page.getByRole('button', { name: /^LD03 Auteursrecht/ })).toBeFocused();
 
   // Zelf melden in een cursus
   await page.getByRole('link', { name: /Photoshop-01/ }).click();
@@ -105,10 +110,12 @@ test('student: van eerste start tot back-up terugzetten', async ({ page }) => {
   // Opleiding en dossier tonen versterkt
   await page.goto('student/#/');
   await expect(page.getByText('3 van de 43 leerdoelen behaald')).toBeVisible();
-  await page.getByRole('link', { name: 'Dossier' }).click();
-  await expect(page.getByRole('heading', { name: 'Wat kan ik al als mediavormgever?' })).toBeVisible();
-  const ld03 = page.locator('li').filter({ has: page.getByText('LD03', { exact: true }) }).first();
-  await expect(ld03.getByText('Versterkt · 2× behaald')).toBeVisible();
+  await expect(page.getByRole('button', { name: /^LD03 Auteursrecht ?: versterkt, behaald in 2 van 2 cursussen$/ })).toBeVisible();
+  // Een andere periode kiezen in de reis
+  await page.getByRole('button', { name: /^P2/ }).click();
+  await expect(page.getByRole('heading', { name: 'Periode 2: 9 cursussen' })).toBeVisible();
+  await page.getByRole('link', { name: 'Cursussen' }).click();
+  await expect(page.getByRole('heading', { name: 'Welke cursussen heb je gehad?' })).toBeVisible();
   await toegankelijk(page);
 
   // Rapport: exporteren
@@ -129,11 +136,11 @@ test('student: van eerste start tot back-up terugzetten', async ({ page }) => {
   await page.getByRole('button', { name: 'Alle gegevens van dit apparaat wissen' }).click();
   await expect(page.getByRole('heading', { name: 'Wat is je studentnummer?' })).toBeVisible();
   await page.getByLabel('Ik heb al een back-up').setInputFiles(pad);
-  await expect(page.getByRole('heading', { name: 'Hoe ver ben ik?' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Wat kan ik al?' })).toBeVisible();
   await expect(page.getByText('3 van de 43 leerdoelen behaald')).toBeVisible();
 
   // Nergens staat dat iets "afgerond" is.
-  for (const scherm of ['#/', '#/cursus/p1-photoshop-01', '#/dossier', '#/code', '#/rapport']) {
+  for (const scherm of ['#/', '#/cursussen', '#/cursus/p1-photoshop-01', '#/code', '#/rapport']) {
     await page.goto(`student/${scherm}`);
     await expect(page.locator('main')).toBeVisible();
     expect((await page.locator('body').innerText()).toLowerCase()).not.toContain('afgerond');
@@ -147,7 +154,7 @@ test('student: werkt zonder internet na het eerste bezoek', async ({ page, conte
   await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
   await context.setOffline(true);
   await page.reload();
-  await expect(page.getByRole('heading', { name: 'Hoe ver ben ik?' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Wat kan ik al?' })).toBeVisible();
   await plak(page, await code([{ opdrachtNr: PS_OEFEN, resultaat: 'voldaan' }]));
   await expect(page.getByText('Code ingevoerd')).toBeVisible();
   await context.setOffline(false);

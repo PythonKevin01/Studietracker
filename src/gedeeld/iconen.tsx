@@ -65,16 +65,10 @@ export const Rapport = (p: P) => (
 export const Pijl = (p: P) => (
   <svg {...basis(p)} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 5 7 7-7 7" /></svg>
 );
-/** Twee zegels over elkaar: behaald in meer dan één cursus (versterkt). */
+/** Ster: behaald in meer dan één cursus (versterkt). Zelfde teken als op de tegels in het overzicht. */
 export const DubbelZegel = (p: P) => (
-  <svg {...basis(p)} viewBox="0 0 28 24">
-    <g transform="translate(5 0)" opacity="0.55">
-      <path fill="currentColor" d="M12 1.8l2.1 1.6 2.6-.3 1 2.4 2.4 1-.3 2.6 1.6 2.1-1.6 2.1.3 2.6-2.4 1-1 2.4-2.6-.3L12 20.6l-2.1-1.6-2.6.3-1-2.4-2.4-1 .3-2.6L2.6 11.2l1.6-2.1-.3-2.6 2.4-1 1-2.4 2.6.3z" />
-    </g>
-    <g transform="translate(0 2)">
-      <path fill="currentColor" stroke="#fff" strokeWidth="1" d="M12 1.8l2.1 1.6 2.6-.3 1 2.4 2.4 1-.3 2.6 1.6 2.1-1.6 2.1.3 2.6-2.4 1-1 2.4-2.6-.3L12 20.6l-2.1-1.6-2.6.3-1-2.4-2.4-1 .3-2.6L2.6 11.2l1.6-2.1-.3-2.6 2.4-1 1-2.4 2.6.3z" />
-      <path d="m8.1 11.4 2.7 2.7 5.1-5.2" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-    </g>
+  <svg {...basis(p)}>
+    <path fill="currentColor" d="M12 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 15l-5.4 3 1.2-6-4.5-4.2 6.1-.7z" />
   </svg>
 );
 /** Liggend streepje: niet van toepassing. */

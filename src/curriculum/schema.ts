@@ -24,6 +24,8 @@ const kerntaakSchema = z.strictObject({
  */
 const leerdoelSchema = z.strictObject({
   id: z.string().regex(/^LD\d+$/, 'Leerdoel-id moet de vorm LD01 hebben'),
+  /** Korte naam voor tegels in het overzicht, bijv. "Software". */
+  kort: z.string().trim().min(1).max(24),
   titel: tekst,
   kerntaken: z.array(tekst).min(1),
   werkproces: tekst.optional(),

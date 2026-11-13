@@ -2,7 +2,7 @@
 import { KERNTAKEN } from '../curriculum/importeer';
 import { leesCurriculum } from '../curriculum/schema';
 
-const ld = (id: string, titel: string, kerntaken: string[], werkproces?: string) => ({ id, titel, kerntaken, ...(werkproces ? { werkproces } : {}) });
+const ld = (id: string, titel: string, kerntaken: string[], werkproces?: string) => ({ id, kort: titel.split(' ').slice(-1)[0], titel, kerntaken, ...(werkproces ? { werkproces } : {}) });
 const opdr = (id: string, nr: number, koppel: [string, 'O' | 'G' | 'B'][]) => ({
   id,
   nr,

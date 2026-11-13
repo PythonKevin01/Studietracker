@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NIVEAUS } from '../../curriculum/schema';
 import { curriculum, leesbareDatum, opdrachtOpId, volledigeOpdrachtNaam } from '../../gedeeld/curriculum';
+import { downloadBestand } from '../../gedeeld/download';
 import { Kaart, Kop, LeerdoelStatusLabel, Melding, hoofdknop, tweedeKnop } from '../../gedeeld/onderdelen';
 import { NIVEAU_LABEL, kerntaakUitkomst, leerdoelTotaal } from '../../rekenregels';
 import type { SchermProps } from '../App';
@@ -13,14 +14,7 @@ export function RapportScherm({ gegevens, bijwerken, wis }: SchermProps & { wis:
 
   const exporteer = async () => {
     const nu = new Date();
-    const blob = new Blob([JSON.stringify(maakExport(gegevens, nu), null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = exportBestandsnaam(gegevens, nu);
-    document.body.append(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 10_000);
+    downloadBestand(exportBestandsnaam(gegevens, nu), JSON.stringify(maakExport(gegevens, nu), null, 2), 'application/json');
     await bijwerken({ ...gegevens, laatsteExport: nu.toISOString() });
     zetGedownload(true);
   };
@@ -32,7 +26,7 @@ export function RapportScherm({ gegevens, bijwerken, wis }: SchermProps & { wis:
   };
 
   return (
-    <>
+    <div className="mx-auto max-w-4xl">
       <Kop label="Rapport" vraag="Wil je je voortgang delen of bewaren?" />
 
       <div className="niet-printen space-y-4">
@@ -73,7 +67,7 @@ export function RapportScherm({ gegevens, bijwerken, wis }: SchermProps & { wis:
           Alle gegevens van dit apparaat wissen
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

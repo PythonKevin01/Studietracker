@@ -1,45 +1,46 @@
 # Leerdoelen zoals aangeleverd door de opleiding (schermafbeeldingen).
+# 'kort' is de naam op de tegels in het overzicht (voorstel, goedgekeurd door de opleiding).
 # Bron voor scripts/importeer-curriculum.ts. LD24-LD28 en LD41-LD43 zijn de werkprocessen zelf.
-- { id: LD01, kerntaak: [K1], titel: "heeft specialistische kennis van mediavormgeving voor verschillende type media" }
-- { id: LD02, kerntaak: [K1], titel: "heeft kennis van storytelling" }
-- { id: LD03, kerntaak: [K1], titel: "heeft kennis van auteursrecht, licenties en ethische richtlijnen" }
-- { id: LD04, kerntaak: [K1], titel: "heeft kennis van marketing en communicatiebegrippen" }
-- { id: LD05, kerntaak: [K1], titel: "heeft specialistische kennis van software voor mediavormgeving" }
-- { id: LD06, kerntaak: [K1], titel: "heeft (technische) kennis van verschillende publicatie middelen in de media" }
-- { id: LD07, kerntaak: [K1], titel: "heeft specialistische kennis van bestandsformaten" }
-- { id: LD08, kerntaak: [K1], titel: "heeft specialistische kennis van vorm, kleur en typografie" }
-- { id: LD09, kerntaak: [K1], titel: "heeft kennis van (generatieve) AI" }
-- { id: LD10, kerntaak: [K1], titel: "heeft kennis van interactiedesign" }
-- { id: LD11, kerntaak: [K1], titel: "heeft kennis van vormen van gebruikerstesten (bijvoorbeeld enquêtes, prototyping en user testing)" }
-- { id: LD12, kerntaak: [K1], titel: "heeft specialistische kennis van ontwerpprincipes and -methodieken" }
-- { id: LD13, kerntaak: [K1], titel: "heeft specialistische kennis van trends en ontwikkelingen in de markt" }
-- { id: LD14, kerntaak: [K1], titel: "kan onderzoeksgegevens/data analyseren, interpreteren en er conclusies uit trekken" }
-- { id: LD15, kerntaak: [K1], titel: "kan een markt -en doelgroeponderzoek uitvoeren" }
-- { id: LD16, kerntaak: [K1], titel: "kan de vormgeving presenteren en onderbouwen" }
-- { id: LD17, kerntaak: [K1, K2], titel: "kan gesprekken voeren met betrokkenen" }
-- { id: LD18, kerntaak: [K1], titel: "kan feedback geven, ontvangen en verwerken" }
-- { id: LD19, kerntaak: [K1], titel: "kan layout en compositieregels toepassen" }
-- { id: LD20, kerntaak: [K1], titel: "kan de mediavormgeving op de vereiste mediaplatforms publiceren" }
-- { id: LD21, kerntaak: [K1], titel: "kan content beheren en archiveren" }
-- { id: LD22, kerntaak: [K1], titel: "kan met gebruiksvriendelijke (A.I.) toepassingen creatieve content maken en/of bewerken" }
-- { id: LD23, kerntaak: [K1], titel: "kan prompts formuleren, structureren en conditioneren" }
-- { id: LD24, kerntaak: [K1], titel: "K1-W1 Onderzoekt en ontwikkelt een creatief concept" }
-- { id: LD25, kerntaak: [K1], titel: "K1-W2 Presenteert en onderbouwt het creatief concept" }
-- { id: LD26, kerntaak: [K1], titel: "K1-W3 Experimenteert met en ontwikkelt de vormgeving" }
-- { id: LD27, kerntaak: [K1], titel: "K1-W4 Test en evalueert prototypes" }
-- { id: LD28, kerntaak: [K1], titel: "K1-W5 Realiseert en levert de vormgeving op" }
-- { id: LD29, kerntaak: [K2], titel: "heeft kennis van projectmatige werkwijzen" }
-- { id: LD30, kerntaak: [K2], titel: "heeft kennis van de eigen drijfveren" }
-- { id: LD31, kerntaak: [K2], titel: "heeft kennis van marketing en branding van zichzelf" }
-- { id: LD32, kerntaak: [K2], titel: "heeft specialistische kennis van trends en ontwikkelingen in de markt" }
-- { id: LD33, kerntaak: [K2], titel: "heeft specialistische kennis van netwerken die relevant zijn voor mediavormgeving" }
-- { id: LD34, kerntaak: [K2], titel: "kan feedback geven, ontvangen en verwerken" }
-- { id: LD35, kerntaak: [K2], titel: "kan opdrachten op projectmatige wijze aanpakken" }
-- { id: LD36, kerntaak: [K1, K2], titel: "kan diens uren/kosten begroten en verantwoorden" }
-- { id: LD37, kerntaak: [K2], titel: "kan de eigen drijfveren en talenten laten zien" }
-- { id: LD38, kerntaak: [K2], titel: "kan een portfolio maken" }
-- { id: LD39, kerntaak: [K2], titel: "kan reflecteren op eigen kwaliteit en functioneren" }
-- { id: LD40, kerntaak: [K2], titel: "kan professioneel communiceren" }
-- { id: LD41, kerntaak: [K2], titel: "K2-W1 Stemt projectvoortgang rond opdrachten af" }
-- { id: LD42, kerntaak: [K2], titel: "K2-W2 Ontwikkelt en onderhoudt de eigen professionaliteit" }
-- { id: LD43, kerntaak: [K2], titel: "K2-W3 Profileert zich als mediavormgever" }
+- { id: LD01, kort: "Mediavormen", kerntaak: [K1], titel: "heeft specialistische kennis van mediavormgeving voor verschillende type media" }
+- { id: LD02, kort: "Storytelling", kerntaak: [K1], titel: "heeft kennis van storytelling" }
+- { id: LD03, kort: "Auteursrecht", kerntaak: [K1], titel: "heeft kennis van auteursrecht, licenties en ethische richtlijnen" }
+- { id: LD04, kort: "Marketing", kerntaak: [K1], titel: "heeft kennis van marketing en communicatiebegrippen" }
+- { id: LD05, kort: "Software", kerntaak: [K1], titel: "heeft specialistische kennis van software voor mediavormgeving" }
+- { id: LD06, kort: "Publicatiemiddelen", kerntaak: [K1], titel: "heeft (technische) kennis van verschillende publicatie middelen in de media" }
+- { id: LD07, kort: "Bestandsformaten", kerntaak: [K1], titel: "heeft specialistische kennis van bestandsformaten" }
+- { id: LD08, kort: "Vorm, kleur, type", kerntaak: [K1], titel: "heeft specialistische kennis van vorm, kleur en typografie" }
+- { id: LD09, kort: "Generatieve AI", kerntaak: [K1], titel: "heeft kennis van (generatieve) AI" }
+- { id: LD10, kort: "Interactiedesign", kerntaak: [K1], titel: "heeft kennis van interactiedesign" }
+- { id: LD11, kort: "Gebruikerstesten", kerntaak: [K1], titel: "heeft kennis van vormen van gebruikerstesten (bijvoorbeeld enquêtes, prototyping en user testing)" }
+- { id: LD12, kort: "Ontwerpprincipes", kerntaak: [K1], titel: "heeft specialistische kennis van ontwerpprincipes and -methodieken" }
+- { id: LD13, kort: "Trends", kerntaak: [K1], titel: "heeft specialistische kennis van trends en ontwikkelingen in de markt" }
+- { id: LD14, kort: "Data-analyse", kerntaak: [K1], titel: "kan onderzoeksgegevens/data analyseren, interpreteren en er conclusies uit trekken" }
+- { id: LD15, kort: "Doelgroeponderzoek", kerntaak: [K1], titel: "kan een markt -en doelgroeponderzoek uitvoeren" }
+- { id: LD16, kort: "Presenteren", kerntaak: [K1], titel: "kan de vormgeving presenteren en onderbouwen" }
+- { id: LD17, kort: "Gesprekken", kerntaak: [K1, K2], titel: "kan gesprekken voeren met betrokkenen" }
+- { id: LD18, kort: "Feedback", kerntaak: [K1], titel: "kan feedback geven, ontvangen en verwerken" }
+- { id: LD19, kort: "Layout", kerntaak: [K1], titel: "kan layout en compositieregels toepassen" }
+- { id: LD20, kort: "Publiceren", kerntaak: [K1], titel: "kan de mediavormgeving op de vereiste mediaplatforms publiceren" }
+- { id: LD21, kort: "Contentbeheer", kerntaak: [K1], titel: "kan content beheren en archiveren" }
+- { id: LD22, kort: "AI-content", kerntaak: [K1], titel: "kan met gebruiksvriendelijke (A.I.) toepassingen creatieve content maken en/of bewerken" }
+- { id: LD23, kort: "Prompten", kerntaak: [K1], titel: "kan prompts formuleren, structureren en conditioneren" }
+- { id: LD24, kort: "Concept", kerntaak: [K1], titel: "K1-W1 Onderzoekt en ontwikkelt een creatief concept" }
+- { id: LD25, kort: "Concept presenteren", kerntaak: [K1], titel: "K1-W2 Presenteert en onderbouwt het creatief concept" }
+- { id: LD26, kort: "Experimenteren", kerntaak: [K1], titel: "K1-W3 Experimenteert met en ontwikkelt de vormgeving" }
+- { id: LD27, kort: "Prototypes testen", kerntaak: [K1], titel: "K1-W4 Test en evalueert prototypes" }
+- { id: LD28, kort: "Opleveren", kerntaak: [K1], titel: "K1-W5 Realiseert en levert de vormgeving op" }
+- { id: LD29, kort: "Projectmatig", kerntaak: [K2], titel: "heeft kennis van projectmatige werkwijzen" }
+- { id: LD30, kort: "Drijfveren", kerntaak: [K2], titel: "heeft kennis van de eigen drijfveren" }
+- { id: LD31, kort: "Personal branding", kerntaak: [K2], titel: "heeft kennis van marketing en branding van zichzelf" }
+- { id: LD32, kort: "Trends", kerntaak: [K2], titel: "heeft specialistische kennis van trends en ontwikkelingen in de markt" }
+- { id: LD33, kort: "Netwerken", kerntaak: [K2], titel: "heeft specialistische kennis van netwerken die relevant zijn voor mediavormgeving" }
+- { id: LD34, kort: "Feedback", kerntaak: [K2], titel: "kan feedback geven, ontvangen en verwerken" }
+- { id: LD35, kort: "Projectaanpak", kerntaak: [K2], titel: "kan opdrachten op projectmatige wijze aanpakken" }
+- { id: LD36, kort: "Uren en kosten", kerntaak: [K1, K2], titel: "kan diens uren/kosten begroten en verantwoorden" }
+- { id: LD37, kort: "Talenten tonen", kerntaak: [K2], titel: "kan de eigen drijfveren en talenten laten zien" }
+- { id: LD38, kort: "Portfolio", kerntaak: [K2], titel: "kan een portfolio maken" }
+- { id: LD39, kort: "Reflecteren", kerntaak: [K2], titel: "kan reflecteren op eigen kwaliteit en functioneren" }
+- { id: LD40, kort: "Communiceren", kerntaak: [K2], titel: "kan professioneel communiceren" }
+- { id: LD41, kort: "Projectvoortgang", kerntaak: [K2], titel: "K2-W1 Stemt projectvoortgang rond opdrachten af" }
+- { id: LD42, kort: "Professionaliteit", kerntaak: [K2], titel: "K2-W2 Ontwikkelt en onderhoudt de eigen professionaliteit" }
+- { id: LD43, kort: "Profileren", kerntaak: [K2], titel: "K2-W3 Profileert zich als mediavormgever" }

@@ -11,7 +11,7 @@ export function CursusScherm({ gegevens, bijwerken, cursusId }: SchermProps & { 
     return (
       <>
         <Kop label="Cursus" vraag="Deze cursus bestaat niet" />
-        <a href="#/" className="font-semibold underline">Terug naar Mijn opleiding</a>
+        <a href="#/cursussen" className="font-semibold underline">Naar alle cursussen</a>
       </>
     );
   }
@@ -22,17 +22,17 @@ export function CursusScherm({ gegevens, bijwerken, cursusId }: SchermProps & { 
 
   if (cursus.leerdoelen.length === 0) {
     return (
-      <>
+      <div className="mx-auto max-w-3xl">
         <Kop label={`Jaar ${cursus.jaar} · periode ${cursus.periode}`} vraag={cursus.titel} />
         <Melding soort="let" titel="Deze cursus heeft geen leerdoelen">
           In het cursusoverzicht van de opleiding staan voor deze cursus geen leerdoelen. Er is hier dus niets bij te houden.
         </Melding>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="mx-auto max-w-5xl">
       <Kop label={`${cursus.titel} · periode ${cursus.periode}`} vraag="Welke opdrachten heb je gedaan?">
         <p>
           Vink een opdracht aan als je hem gedaan hebt: dan is hij <strong>zelf gemeld</strong>. Je docent maakt hem{' '}
@@ -42,6 +42,7 @@ export function CursusScherm({ gegevens, bijwerken, cursusId }: SchermProps & { 
         </p>
       </Kop>
 
+      <div className="grid gap-8 lg:grid-cols-2">
       <section aria-labelledby="opdrachten">
         <h2 id="opdrachten" className="text-xl font-bold">Opdrachten</h2>
         <ul className="mt-2 space-y-3">
@@ -51,7 +52,7 @@ export function CursusScherm({ gegevens, bijwerken, cursusId }: SchermProps & { 
         </ul>
       </section>
 
-      <section aria-labelledby="leerdoelen" className="mt-8">
+      <section aria-labelledby="leerdoelen">
         <h2 id="leerdoelen" className="text-xl font-bold">Leerdoelen in deze cursus</h2>
         <Waarom regels={u.waarom} over={cursus.titel} />
         <ul className="mt-2 space-y-3">
@@ -62,7 +63,8 @@ export function CursusScherm({ gegevens, bijwerken, cursusId }: SchermProps & { 
           ))}
         </ul>
       </section>
-    </>
+      </div>
+    </div>
   );
 }
 

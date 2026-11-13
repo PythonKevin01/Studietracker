@@ -35,183 +35,226 @@ kerntaken:
         titel: Profileert zich als mediavormgever
 leerdoelen:
   - id: LD01
+    kort: Mediavormen
     titel: Heeft specialistische kennis van mediavormgeving voor verschillende type media
     kerntaken:
       - B1-K1
   - id: LD02
+    kort: Storytelling
     titel: Heeft kennis van storytelling
     kerntaken:
       - B1-K1
   - id: LD03
+    kort: Auteursrecht
     titel: Heeft kennis van auteursrecht, licenties en ethische richtlijnen
     kerntaken:
       - B1-K1
   - id: LD04
+    kort: Marketing
     titel: Heeft kennis van marketing en communicatiebegrippen
     kerntaken:
       - B1-K1
   - id: LD05
+    kort: Software
     titel: Heeft specialistische kennis van software voor mediavormgeving
     kerntaken:
       - B1-K1
   - id: LD06
+    kort: Publicatiemiddelen
     titel: Heeft (technische) kennis van verschillende publicatie middelen in de media
     kerntaken:
       - B1-K1
   - id: LD07
+    kort: Bestandsformaten
     titel: Heeft specialistische kennis van bestandsformaten
     kerntaken:
       - B1-K1
   - id: LD08
+    kort: Vorm, kleur, type
     titel: Heeft specialistische kennis van vorm, kleur en typografie
     kerntaken:
       - B1-K1
   - id: LD09
+    kort: Generatieve AI
     titel: Heeft kennis van (generatieve) AI
     kerntaken:
       - B1-K1
   - id: LD10
+    kort: Interactiedesign
     titel: Heeft kennis van interactiedesign
     kerntaken:
       - B1-K1
   - id: LD11
+    kort: Gebruikerstesten
     titel: Heeft kennis van vormen van gebruikerstesten (bijvoorbeeld enquêtes, prototyping en user testing)
     kerntaken:
       - B1-K1
   - id: LD12
+    kort: Ontwerpprincipes
     titel: Heeft specialistische kennis van ontwerpprincipes and -methodieken
     kerntaken:
       - B1-K1
   - id: LD13
+    kort: Trends
     titel: Heeft specialistische kennis van trends en ontwikkelingen in de markt
     kerntaken:
       - B1-K1
   - id: LD14
+    kort: Data-analyse
     titel: Kan onderzoeksgegevens/data analyseren, interpreteren en er conclusies uit trekken
     kerntaken:
       - B1-K1
   - id: LD15
+    kort: Doelgroeponderzoek
     titel: Kan een markt -en doelgroeponderzoek uitvoeren
     kerntaken:
       - B1-K1
   - id: LD16
+    kort: Presenteren
     titel: Kan de vormgeving presenteren en onderbouwen
     kerntaken:
       - B1-K1
   - id: LD17
+    kort: Gesprekken
     titel: Kan gesprekken voeren met betrokkenen
     kerntaken:
       - B1-K1
       - B1-K2
   - id: LD18
+    kort: Feedback
     titel: Kan feedback geven, ontvangen en verwerken
     kerntaken:
       - B1-K1
   - id: LD19
+    kort: Layout
     titel: Kan layout en compositieregels toepassen
     kerntaken:
       - B1-K1
   - id: LD20
+    kort: Publiceren
     titel: Kan de mediavormgeving op de vereiste mediaplatforms publiceren
     kerntaken:
       - B1-K1
   - id: LD21
+    kort: Contentbeheer
     titel: Kan content beheren en archiveren
     kerntaken:
       - B1-K1
   - id: LD22
+    kort: AI-content
     titel: Kan met gebruiksvriendelijke (A.I.) toepassingen creatieve content maken en/of bewerken
     kerntaken:
       - B1-K1
   - id: LD23
+    kort: Prompten
     titel: Kan prompts formuleren, structureren en conditioneren
     kerntaken:
       - B1-K1
   - id: LD24
+    kort: Concept
     titel: Onderzoekt en ontwikkelt een creatief concept
     kerntaken:
       - B1-K1
     werkproces: B1-K1-W1
   - id: LD25
+    kort: Concept presenteren
     titel: Presenteert en onderbouwt het creatief concept
     kerntaken:
       - B1-K1
     werkproces: B1-K1-W2
   - id: LD26
+    kort: Experimenteren
     titel: Experimenteert met en ontwikkelt de vormgeving
     kerntaken:
       - B1-K1
     werkproces: B1-K1-W3
   - id: LD27
+    kort: Prototypes testen
     titel: Test en evalueert prototypes
     kerntaken:
       - B1-K1
     werkproces: B1-K1-W4
   - id: LD28
+    kort: Opleveren
     titel: Realiseert en levert de vormgeving op
     kerntaken:
       - B1-K1
     werkproces: B1-K1-W5
   - id: LD29
+    kort: Projectmatig
     titel: Heeft kennis van projectmatige werkwijzen
     kerntaken:
       - B1-K2
   - id: LD30
+    kort: Drijfveren
     titel: Heeft kennis van de eigen drijfveren
     kerntaken:
       - B1-K2
   - id: LD31
+    kort: Personal branding
     titel: Heeft kennis van marketing en branding van zichzelf
     kerntaken:
       - B1-K2
   - id: LD32
+    kort: Trends
     titel: Heeft specialistische kennis van trends en ontwikkelingen in de markt
     kerntaken:
       - B1-K2
   - id: LD33
+    kort: Netwerken
     titel: Heeft specialistische kennis van netwerken die relevant zijn voor mediavormgeving
     kerntaken:
       - B1-K2
   - id: LD34
+    kort: Feedback
     titel: Kan feedback geven, ontvangen en verwerken
     kerntaken:
       - B1-K2
   - id: LD35
+    kort: Projectaanpak
     titel: Kan opdrachten op projectmatige wijze aanpakken
     kerntaken:
       - B1-K2
   - id: LD36
+    kort: Uren en kosten
     titel: Kan diens uren/kosten begroten en verantwoorden
     kerntaken:
       - B1-K1
       - B1-K2
   - id: LD37
+    kort: Talenten tonen
     titel: Kan de eigen drijfveren en talenten laten zien
     kerntaken:
       - B1-K2
   - id: LD38
+    kort: Portfolio
     titel: Kan een portfolio maken
     kerntaken:
       - B1-K2
   - id: LD39
+    kort: Reflecteren
     titel: Kan reflecteren op eigen kwaliteit en functioneren
     kerntaken:
       - B1-K2
   - id: LD40
+    kort: Communiceren
     titel: Kan professioneel communiceren
     kerntaken:
       - B1-K2
   - id: LD41
+    kort: Projectvoortgang
     titel: Stemt projectvoortgang rond opdrachten af
     kerntaken:
       - B1-K2
     werkproces: B1-K2-W1
   - id: LD42
+    kort: Professionaliteit
     titel: Ontwikkelt en onderhoudt de eigen professionaliteit
     kerntaken:
       - B1-K2
     werkproces: B1-K2-W2
   - id: LD43
+    kort: Profileren
     titel: Profileert zich als mediavormgever
     kerntaken:
       - B1-K2

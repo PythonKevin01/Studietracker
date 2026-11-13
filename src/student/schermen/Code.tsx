@@ -50,7 +50,7 @@ export function CodeScherm({
   };
 
   return (
-    <>
+    <div className="mx-auto max-w-2xl">
       <Kop label="Code invoeren" vraag="Heb je een code van je docent?">
         <p>
           Een <strong>bewijscode</strong> is een bevestiging van je docent dat je een opdracht hebt gedaan. De docent zet er een
@@ -93,7 +93,7 @@ export function CodeScherm({
           </button>
         </form>
       </Kaart>
-    </>
+    </div>
   );
 }
 

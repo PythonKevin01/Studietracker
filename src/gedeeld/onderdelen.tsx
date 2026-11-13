@@ -154,7 +154,7 @@ export function DemoLabel() {
 
 export function Voettekst() {
   return (
-    <footer className="mx-auto mt-10 max-w-xl px-4 pb-6 text-sm text-stone-700 print-breed">
+    <footer className="mx-auto mt-10 max-w-[1680px] px-4 pb-6 text-sm text-stone-700 lg:px-6 print:px-0">
       <p className="font-semibold">Dit is een ontwikkeloverzicht, geen examinering.</p>
       <p className="mt-1">
         <DemoLabel /> Proefversie: de opdrachten zijn verzonnen. Cursussen en leerdoelen komen uit het cursusoverzicht van de opleiding.

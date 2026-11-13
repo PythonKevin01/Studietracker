@@ -22,6 +22,8 @@ export interface StudentGegevens {
   codes: OntvangenCode[];
   /** Moment van de laatste export, of null. */
   laatsteExport: string | null;
+  /** Periode die de student in het overzicht heeft gekozen. Zonder keuze rekent de app hem uit. */
+  periode?: number;
 }
 
 export function nieuweGegevens(studentnummer: string): StudentGegevens {

@@ -23,7 +23,7 @@ export function StartScherm({ wachtendeCode, klaar }: { wachtendeCode: string | 
   };
 
   return (
-    <>
+    <div className="mx-auto max-w-xl">
       <Kop label="Welkom" vraag="Wat is je studentnummer?">
         <p>
           Met deze app houd je zelf bij hoe ver je bent met de opleiding {curriculum.opleiding.naam}. Je studentnummer vul je één
@@ -81,6 +81,6 @@ export function StartScherm({ wachtendeCode, klaar }: { wachtendeCode: string | 
         </p>
         <Terugzetten huidig={null} klaar={klaar} knopTekst="Ik heb al een back-up" />
       </Kaart>
-    </>
+    </div>
   );
 }
