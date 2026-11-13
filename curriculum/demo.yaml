@@ -1,0 +1,81 @@
+# DEMO-curriculum voor de proef. Geen echt onderwijsprogramma.
+#
+# Echt (aangeleverd door de opleiding): de titels van de werkprocessen en van
+# de vier leerdoelen.
+# Verzonnen voor de demo: het vak, de zes opdrachten, de niveaus en de
+# koppelingen tussen leerdoelen en werkprocessen.
+versie: 1
+demo: true
+opleiding:
+  naam: Mediavormgever
+  crebo: "27110"
+  dossier: "23439"
+
+kerntaken:
+  - id: B1-K1
+    titel: Kerntaak 1
+    werkprocessen:
+      - { id: B1-K1-W1, titel: Onderzoekt en ontwikkelt een creatief concept }
+      - { id: B1-K1-W2, titel: Presenteert en onderbouwt het creatief concept }
+      - { id: B1-K1-W3, titel: Experimenteert met en ontwikkelt de vormgeving }
+      - { id: B1-K1-W4, titel: Test en evalueert prototypes }
+      - { id: B1-K1-W5, titel: Realiseert en levert de vormgeving op }
+  - id: B1-K2
+    titel: Kerntaak 2
+    werkprocessen:
+      - { id: B1-K2-W1, titel: Stemt projectvoortgang rond opdrachten af }
+      - { id: B1-K2-W2, titel: Ontwikkelt en onderhoudt de eigen professionaliteit }
+      - { id: B1-K2-W3, titel: Profileert zich als mediavormgever }
+
+vakken:
+  - id: demo-vak
+    titel: DEMO-vak Visuele identiteit
+    leerdoelen:
+      - id: LD15
+        titel: Kan een markt- en doelgroeponderzoek uitvoeren
+        werkprocessen: [B1-K1-W1]
+      - id: LD17
+        titel: Kan gesprekken voeren met betrokkenen
+        werkprocessen: [B1-K1-W2, B1-K1-W4, B1-K2-W1]
+      - id: LD19
+        titel: Kan layout en compositieregels toepassen
+        werkprocessen: [B1-K1-W3, B1-K1-W5]
+      - id: LD38
+        titel: Kan een portfolio maken
+        werkprocessen: [B1-K2-W2, B1-K2-W3]
+    opdrachten:
+      # 'nr' staat in de bewijscode. Nooit wijzigen of hergebruiken.
+      - id: demo-1
+        nr: 1
+        titel: "DEMO-opdracht 1: Doelgroep in beeld"
+        leerdoelen:
+          - { leerdoel: LD15, niveau: O }
+      - id: demo-2
+        nr: 2
+        titel: "DEMO-opdracht 2: Mini-onderzoek"
+        leerdoelen:
+          - { leerdoel: LD15, niveau: G }
+          - { leerdoel: LD17, niveau: O }
+      - id: demo-3
+        nr: 3
+        titel: "DEMO-opdracht 3: Onderzoeksverslag met klantgesprek"
+        leerdoelen:
+          - { leerdoel: LD15, niveau: B }
+          - { leerdoel: LD17, niveau: G }
+      - id: demo-4
+        nr: 4
+        titel: "DEMO-opdracht 4: Posterreeks"
+        leerdoelen:
+          - { leerdoel: LD19, niveau: G }
+      - id: demo-5
+        nr: 5
+        titel: "DEMO-opdracht 5: Huisstijl opleveren"
+        leerdoelen:
+          - { leerdoel: LD19, niveau: B }
+          - { leerdoel: LD17, niveau: B }
+      - id: demo-6
+        nr: 6
+        titel: "DEMO-opdracht 6: Portfoliopagina"
+        leerdoelen:
+          - { leerdoel: LD38, niveau: B }
+          - { leerdoel: LD19, niveau: G }
