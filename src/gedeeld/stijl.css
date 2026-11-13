@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --color-papier: #f7f5f0;
+  --color-inkt: #1c1917;
+  --color-lijn: #78716c;
+}
+
+html { background: var(--color-papier); color: var(--color-inkt); -webkit-text-size-adjust: 100%; scroll-padding-bottom: 6rem; scroll-padding-top: 1rem; }
+body { min-height: 100dvh; }
+
+:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; border-radius: 4px; }
+
+/* Zelf gemeld = gearceerd, bevestigd = vol, open = alleen rand. Nooit alleen kleur. */
+.gearceerd { background-image: repeating-linear-gradient(135deg, currentColor 0 2px, transparent 2px 5px); }
+
+/* Het zegel "bevestigd" wordt als een stempel op de opdracht gedrukt. */
+@keyframes stempel {
+  0% { transform: scale(2.4) rotate(-30deg); opacity: 0; }
+  55% { transform: scale(0.9) rotate(6deg); opacity: 1; }
+  75% { transform: scale(1.06) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+@keyframes inkt {
+  0% { box-shadow: 0 0 0 0 rgb(4 120 87 / 0.45); }
+  100% { box-shadow: 0 0 0 18px rgb(4 120 87 / 0); }
+}
+.stempel { animation: stempel 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both, inkt 0.9s 0.45s ease-out both; border-radius: 9999px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stempel { animation: none; }
+}
+
+@media print {
+  .niet-printen { display: none !important; }
+  html, body { background: #fff; }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  .print-breed { max-width: none !important; padding: 0 !important; }
+  .kaart { break-inside: avoid; box-shadow: none !important; }
+}

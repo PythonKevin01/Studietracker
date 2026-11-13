@@ -3,3 +3,7 @@ dist
 *.lokaal.json
 *.sleutel.json
 .DS_Store
+dist-e2e
+test-results
+playwright-report
+test-uitvoer
