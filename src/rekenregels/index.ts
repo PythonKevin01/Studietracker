@@ -384,3 +384,72 @@ export function opleidingUitkomst(c: Curriculum, voortgang: Voortgang): Opleidin
     ],
   };
 }
+
+// --- Periode en volgende stap (questlog) ----------------------------------
+
+export function perioden(c: Curriculum): { jaar: number; periode: number }[] {
+  const gezien = new Map<number, number>();
+  for (const cu of c.cursussen) if (!gezien.has(cu.periode)) gezien.set(cu.periode, cu.jaar);
+  return [...gezien].map(([periode, jaar]) => ({ jaar, periode })).sort((a, b) => a.periode - b.periode);
+}
+
+/**
+ * De periode waar de student mee bezig is, als niets anders gekozen is: de
+ * laatste periode met een zelf gemelde of bevestigde opdracht, anders de eerste.
+ */
+export function actievePeriode(c: Curriculum, voortgang: Voortgang): number {
+  let laatste = perioden(c)[0]?.periode ?? 1;
+  for (const cu of c.cursussen) {
+    if (cu.opdrachten.some((o) => statusVan(voortgang, o.id) !== 'open')) laatste = Math.max(laatste, cu.periode);
+  }
+  return laatste;
+}
+
+export interface PeriodeUitkomst {
+  jaar: number;
+  periode: number;
+  cursussen: CursusUitkomst[];
+  /** Cursussen met leerdoelen, en daarvan die waarin alle leerdoelen behaald zijn. */
+  metLeerdoelen: number;
+  allesBehaald: number;
+}
+
+export function periodeUitkomst(c: Curriculum, periode: number, voortgang: Voortgang): PeriodeUitkomst {
+  const cursussen = c.cursussen.filter((cu) => cu.periode === periode).map((cu) => cursusUitkomst(c, cu.id, voortgang));
+  const met = cursussen.filter((u) => u.status !== 'geen_leerdoelen');
+  return {
+    jaar: c.cursussen.find((cu) => cu.periode === periode)?.jaar ?? 0,
+    periode,
+    cursussen,
+    metLeerdoelen: met.length,
+    allesBehaald: met.filter((u) => u.status === 'behaald').length,
+  };
+}
+
+export type VolgendeStap =
+  | { soort: 'doen'; cursusId: string; opdrachtId: string; tekst: string; levertOp: string[] }
+  | { soort: 'docent'; cursusId: string; opdrachtId: string; tekst: string; levertOp: string[] }
+  | { soort: 'klaar'; tekst: string; levertOp: string[] };
+
+/**
+ * Eén concrete volgende stap in een periode:
+ * 1. de eerste open opdracht (in de volgorde van het cursusoverzicht);
+ * 2. anders een zelf gemelde opdracht die nog een code van de docent nodig heeft;
+ * 3. anders: alles in deze periode is bevestigd.
+ */
+export function volgendeStap(c: Curriculum, periode: number, voortgang: Voortgang): VolgendeStap {
+  const cursussen = c.cursussen.filter((cu) => cu.periode === periode);
+  const kort = (ids: string[]) => ids.map((id) => c.leerdoelen.find((l) => l.id === id)?.kort ?? id);
+  for (const soort of ['open', 'zelf_gemeld'] as const) {
+    for (const cu of cursussen) {
+      const o = cu.opdrachten.find((x) => statusVan(voortgang, x.id) === soort);
+      if (!o) continue;
+      const levertOp = kort(o.leerdoelen.map((k) => k.leerdoel));
+      const naam = o.titel.replace(/^DEMO-/, '');
+      return soort === 'open'
+        ? { soort: 'doen', cursusId: cu.id, opdrachtId: o.id, levertOp, tekst: `Maak de ${naam} van ${cu.titel}.` }
+        : { soort: 'docent', cursusId: cu.id, opdrachtId: o.id, levertOp, tekst: `Vraag je docent om een code voor de ${naam} van ${cu.titel}.` };
+    }
+  }
+  return { soort: 'klaar', levertOp: [], tekst: `Alles in periode ${periode} is bevestigd. Kijk vooruit naar de volgende periode.` };
+}

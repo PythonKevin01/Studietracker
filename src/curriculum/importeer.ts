@@ -39,6 +39,7 @@ const EERSTE_NR = 101;
 
 export interface BronLeerdoel {
   id: string;
+  kort: string;
   kerntaak: string[];
   titel: string;
 }
@@ -55,6 +56,7 @@ function maakLeerdoel(b: BronLeerdoel): Leerdoel {
   const titel = (wp?.[2] ?? b.titel).trim();
   return {
     id: b.id,
+    kort: b.kort,
     titel: titel.charAt(0).toUpperCase() + titel.slice(1),
     kerntaken,
     ...(wp ? { werkproces: `B1-${wp[1]}` } : {}),

@@ -119,3 +119,25 @@ describe('cursus en opleiding', () => {
     expect(u.leerdoelen).toEqual({ totaal: 4, behaald: 2, versterkt: 1, bezig: 0, nog_niet_gestart: 2 });
   });
 });
+
+describe('periode en volgende stap', () => {
+  it('actieve periode is de laatste met activiteit, anders de eerste', async () => {
+    const { actievePeriode, perioden } = await import('./index');
+    expect(perioden(c)).toEqual([{ jaar: 1, periode: 1 }, { jaar: 1, periode: 2 }, { jaar: 2, periode: 7 }]);
+    expect(actievePeriode(c, {})).toBe(1);
+    expect(actievePeriode(c, { a1: 'bevestigd', b1: 'zelf_gemeld' })).toBe(2);
+  });
+
+  it('periode telt cursussen waarin alle leerdoelen behaald zijn', async () => {
+    const { periodeUitkomst } = await import('./index');
+    const p = periodeUitkomst(c, 7, { c1: 'bevestigd' });
+    expect([p.jaar, p.metLeerdoelen, p.allesBehaald, p.cursussen.length]).toEqual([2, 1, 1, 2]);
+  });
+
+  it('volgende stap: eerst open opdrachten, dan wachten op de docent, dan klaar', async () => {
+    const { volgendeStap } = await import('./index');
+    expect(volgendeStap(c, 1, {})).toMatchObject({ soort: 'doen', opdrachtId: 'a1', levertOp: ['software', 'concept'] });
+    expect(volgendeStap(c, 1, { a1: 'bevestigd', a2: 'zelf_gemeld' })).toMatchObject({ soort: 'docent', opdrachtId: 'a2' });
+    expect(volgendeStap(c, 1, { a1: 'bevestigd', a2: 'bevestigd' }).soort).toBe('klaar');
+  });
+});

@@ -32,7 +32,7 @@ export function RapportScherm({ gegevens, bijwerken, wis }: SchermProps & { wis:
   };
 
   return (
-    <>
+    <div className="mx-auto max-w-4xl">
       <Kop label="Rapport" vraag="Wil je je voortgang delen of bewaren?" />
 
       <div className="niet-printen space-y-4">
@@ -73,7 +73,7 @@ export function RapportScherm({ gegevens, bijwerken, wis }: SchermProps & { wis:
           Alle gegevens van dit apparaat wissen
         </button>
       </div>
-    </>
+    </div>
   );
 }
 
