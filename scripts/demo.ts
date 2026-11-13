@@ -1,48 +1,98 @@
 /**
- * Hulpmiddel voor de demo. Alle bestanden die dit script schrijft, staan
- * buiten git (zie .gitignore) en komen niet in de build.
+ * Sleutels en codes vanaf de opdrachtregel, tot de docentpagina (stap 3) klaar is.
+ * Alle privésleutels die dit script schrijft, staan buiten git (*.sleutel.json in
+ * .gitignore) en komen niet in de build.
  *
- *   npx tsx scripts/demo.ts sleutel [--als-nodig]
- *       Maakt een demo-sleutelpaar (sleutelnummer 1):
- *       - keys/publieke-sleutels.lokaal.json  publieke sleutel, wordt in de app gebouwd
- *       - keys/demo-docent.sleutel.json       privésleutel, versleuteld met de demo-wachtwoordzin
- *
- *   npx tsx scripts/demo.ts code <studentnummer> <opdrachtnr>[,...] [--niet-voldaan]
- *       Maakt een bewijscode en drukt de link af.
+ *   npm run demo:sleutel                  Demo-sleutel voor lokaal testen (vaste demo-wachtwoordzin).
+ *   npm run sleutel:nieuw                 Eigen sleutel voor de gepubliceerde app. Vraagt een
+ *                                         wachtwoordzin en zet de publieke sleutel in
+ *                                         keys/publieke-sleutels.json (die commit je).
+ *   npm run code -- <studentnr> <nr>[,<nr>…] [--niet-voldaan] [--sleutel <bestand>]
+ *                                         Maakt een bewijscode en drukt code en link af.
+ *                                         Link-adres: STUDIETRACKER_URL (standaard localhost).
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { createInterface } from 'node:readline';
 import { maakLink } from '../src/bewijscode/formaat';
 import { maakBewijscode, maakSleutelpaar } from '../src/bewijscode/ondertekenen';
-import { ontgrendelSleutel, versleutelSleutel } from '../src/bewijscode/sleutelbestand';
+import { keurWachtwoordzin, ontgrendelSleutel, versleutelSleutel } from '../src/bewijscode/sleutelbestand';
+import { leesPubliekeSleutels } from '../src/bewijscode/sleutels';
 
-export const DEMO_WACHTWOORDZIN = 'alleen voor de demo, nooit echt gebruiken';
-const PUBLIEK = 'keys/publieke-sleutels.lokaal.json';
-const PRIVE = 'keys/demo-docent.sleutel.json';
-const BASIS_URL = process.env.DEMO_URL ?? 'http://localhost:4173/student/';
+const DEMO_WACHTWOORDZIN = 'alleen voor de demo, nooit echt gebruiken';
+const DEMO_PRIVE = 'keys/demo-docent.sleutel.json';
+const DEMO_PUBLIEK = 'keys/publieke-sleutels.lokaal.json';
+const PUBLIEK = 'keys/publieke-sleutels.json';
+const BASIS_URL = process.env.STUDIETRACKER_URL ?? 'http://localhost:4173/student/';
 
-async function sleutel(alsNodig: boolean) {
-  if (alsNodig && existsSync(PUBLIEK) && existsSync(PRIVE)) {
-    console.log(`Demo-sleutel bestaat al (${PRIVE}).`);
+/** Vraagt iets zonder het op het scherm te tonen. Zonder terminal: uit WACHTWOORDZIN. */
+async function vraagGeheim(vraag: string): Promise<string> {
+  if (process.env.WACHTWOORDZIN) return process.env.WACHTWOORDZIN;
+  if (!process.stdin.isTTY) throw new Error('Geen terminal: zet de wachtwoordzin in WACHTWOORDZIN.');
+  const rl = createInterface({ input: process.stdin, output: process.stdout, terminal: true });
+  const uit = rl as unknown as { _writeToOutput: (s: string) => void };
+  let tonen = true;
+  uit._writeToOutput = (s) => {
+    if (tonen) process.stdout.write(s);
+  };
+  return new Promise((klaar) => {
+    rl.question(vraag, (antwoord) => {
+      rl.close();
+      process.stdout.write('\n');
+      klaar(antwoord);
+    });
+    tonen = false;
+  });
+}
+
+async function demoSleutel(alsNodig: boolean) {
+  if (alsNodig && existsSync(DEMO_PUBLIEK) && existsSync(DEMO_PRIVE)) {
+    console.log(`Demo-sleutel bestaat al (${DEMO_PRIVE}).`);
     return;
   }
   mkdirSync('keys', { recursive: true });
   const paar = await maakSleutelpaar();
   const bestand = await versleutelSleutel(paar.priveSleutel, 1, DEMO_WACHTWOORDZIN);
-  writeFileSync(PRIVE, JSON.stringify(bestand, null, 2) + '\n');
-  writeFileSync(PUBLIEK, JSON.stringify([{ nummer: 1, sleutel: bestand.publiekeSleutel, omschrijving: 'DEMO-sleutel' }], null, 2) + '\n');
-  console.log(`Demo-sleutel gemaakt.\n  Publiek: ${PUBLIEK}\n  Privé (versleuteld): ${PRIVE}\n  Wachtwoordzin: "${DEMO_WACHTWOORDZIN}"`);
-  console.log('Bouw de app opnieuw, zodat hij de nieuwe publieke sleutel kent.');
+  writeFileSync(DEMO_PRIVE, JSON.stringify(bestand, null, 2) + '\n');
+  writeFileSync(DEMO_PUBLIEK, JSON.stringify([{ nummer: 1, sleutel: bestand.publiekeSleutel, omschrijving: 'DEMO-sleutel' }], null, 2) + '\n');
+  console.log(`Demo-sleutel gemaakt (${DEMO_PRIVE}). Alleen voor lokaal testen; de wachtwoordzin staat in dit script.`);
 }
 
-async function code(studentnummer: string | undefined, nrs: string | undefined, nietVoldaan: boolean) {
-  if (!studentnummer || !nrs) throw new Error('Gebruik: code <studentnummer> <opdrachtnr>[,...] [--niet-voldaan]');
-  const s = await ontgrendelSleutel(JSON.parse(readFileSync(PRIVE, 'utf8')), DEMO_WACHTWOORDZIN);
+async function nieuweSleutel() {
+  const bestaand = existsSync(PUBLIEK) ? (JSON.parse(readFileSync(PUBLIEK, 'utf8')) as { nummer: number; sleutel: string; omschrijving?: string }[]) : [];
+  leesPubliekeSleutels(bestaand);
+  const nummer = Math.max(0, ...bestaand.map((s) => s.nummer)) + 1;
+  if (nummer > 255) throw new Error('Alle sleutelnummers zijn gebruikt.');
+
+  console.log(`Nieuwe sleutel, nummer ${nummer}.`);
+  const zin = await vraagGeheim('Kies een wachtwoordzin (minstens 16 tekens): ');
+  const fout = keurWachtwoordzin(zin);
+  if (fout) throw new Error(fout);
+  if ((await vraagGeheim('Nog een keer: ')) !== zin) throw new Error('De twee wachtwoordzinnen zijn niet gelijk.');
+
+  const paar = await maakSleutelpaar();
+  const bestand = await versleutelSleutel(paar.priveSleutel, nummer, zin);
+  const prive = `keys/docent-${nummer}.sleutel.json`;
+  writeFileSync(prive, JSON.stringify(bestand, null, 2) + '\n');
+  writeFileSync(PUBLIEK, JSON.stringify([...bestaand, { nummer, sleutel: bestand.publiekeSleutel }], null, 2) + '\n');
+  console.log(`
+Klaar.
+  Privésleutel (versleuteld, NIET committen): ${prive}
+  Publieke sleutel toegevoegd aan:            ${PUBLIEK}  (wel committen)
+Bewaar ${prive} ook ergens anders veilig. Kwijt = geen nieuwe codes meer met dit nummer.`);
+}
+
+async function code(args: string[], vlaggen: Set<string>, sleutelPad: string) {
+  const [studentnummer, nrs] = args;
+  if (!studentnummer || !nrs) throw new Error('Gebruik: npm run code -- <studentnummer> <opdrachtnr>[,...] [--niet-voldaan] [--sleutel <bestand>]');
+  const zin = sleutelPad === DEMO_PRIVE ? DEMO_WACHTWOORDZIN : await vraagGeheim(`Wachtwoordzin voor ${sleutelPad}: `);
+  const s = await ontgrendelSleutel(JSON.parse(readFileSync(sleutelPad, 'utf8')), zin);
+  const resultaat = vlaggen.has('--niet-voldaan') ? ('niet_voldaan' as const) : ('voldaan' as const);
   const tekst = await maakBewijscode(
     {
       sleutelnummer: s.sleutelnummer,
-      datum: new Date().toISOString().slice(0, 10),
+      datum: new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Amsterdam' }),
       studentnummer,
-      regels: nrs.split(',').map((n) => ({ opdrachtNr: Number(n), resultaat: nietVoldaan ? ('niet_voldaan' as const) : ('voldaan' as const) })),
+      regels: nrs.split(',').map((n) => ({ opdrachtNr: Number(n), resultaat })),
     },
     s.priveSleutel,
   );
@@ -50,11 +100,16 @@ async function code(studentnummer: string | undefined, nrs: string | undefined, 
 }
 
 const [opdracht, ...rest] = process.argv.slice(2);
+const sleutelIndex = rest.indexOf('--sleutel');
+const sleutelPad = sleutelIndex >= 0 ? rest.splice(sleutelIndex, 2)[1] ?? '' : DEMO_PRIVE;
 const vlaggen = new Set(rest.filter((a) => a.startsWith('--')));
 const args = rest.filter((a) => !a.startsWith('--'));
-if (opdracht === 'sleutel') await sleutel(vlaggen.has('--als-nodig'));
-else if (opdracht === 'code') await code(args[0], args[1], vlaggen.has('--niet-voldaan'));
-else {
-  console.error('Gebruik: tsx scripts/demo.ts sleutel [--als-nodig] | code <studentnummer> <opdrachtnr>[,...] [--niet-voldaan]');
+try {
+  if (opdracht === 'sleutel') await demoSleutel(vlaggen.has('--als-nodig'));
+  else if (opdracht === 'nieuw') await nieuweSleutel();
+  else if (opdracht === 'code') await code(args, vlaggen, sleutelPad);
+  else throw new Error('Gebruik: tsx scripts/demo.ts sleutel [--als-nodig] | nieuw | code <studentnummer> <opdrachtnr>[,...]');
+} catch (e) {
+  console.error(e instanceof Error ? e.message : e);
   process.exit(1);
 }

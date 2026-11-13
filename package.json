@@ -12,7 +12,8 @@
     "test:e2e": "playwright test --trace off",
     "demo": "tsx scripts/demo.ts sleutel --als-nodig && npm run build && vite preview --host",
     "demo:sleutel": "tsx scripts/demo.ts sleutel",
-    "demo:code": "tsx scripts/demo.ts code"
+    "sleutel:nieuw": "tsx scripts/demo.ts nieuw",
+    "code": "tsx scripts/demo.ts code"
   },
   "dependencies": {
     "@noble/ed25519": "^3.2.0",

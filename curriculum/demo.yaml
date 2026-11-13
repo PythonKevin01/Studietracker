@@ -13,7 +13,7 @@ opleiding:
 
 kerntaken:
   - id: B1-K1
-    titel: Kerntaak 1
+    titel: Ontwerpt mediavormgeving
     werkprocessen:
       - { id: B1-K1-W1, titel: Onderzoekt en ontwikkelt een creatief concept }
       - { id: B1-K1-W2, titel: Presenteert en onderbouwt het creatief concept }
@@ -21,7 +21,7 @@ kerntaken:
       - { id: B1-K1-W4, titel: Test en evalueert prototypes }
       - { id: B1-K1-W5, titel: Realiseert en levert de vormgeving op }
   - id: B1-K2
-    titel: Kerntaak 2
+    titel: Positioneert zich in de markt
     werkprocessen:
       - { id: B1-K2-W1, titel: Stemt projectvoortgang rond opdrachten af }
       - { id: B1-K2-W2, titel: Ontwikkelt en onderhoudt de eigen professionaliteit }
