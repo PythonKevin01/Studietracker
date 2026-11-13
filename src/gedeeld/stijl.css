@@ -40,3 +40,9 @@ body { min-height: 100dvh; }
   .print-breed { max-width: none !important; padding: 0 !important; }
   .kaart { break-inside: avoid; box-shadow: none !important; }
 }
+
+/* Printvel met QR-codes: alleen de kaarten, zonder schermonderdelen. */
+@media print {
+  @page { margin: 12mm; }
+  .printvel > li { break-inside: avoid; }
+}

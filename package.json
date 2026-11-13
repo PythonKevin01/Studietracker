@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && tsx scripts/controleer-build.ts",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -14,12 +14,14 @@
     "demo:sleutel": "tsx scripts/demo.ts sleutel",
     "sleutel:nieuw": "tsx scripts/demo.ts nieuw",
     "code": "tsx scripts/demo.ts code",
-    "curriculum": "tsx scripts/importeer-curriculum.ts"
+    "curriculum": "tsx scripts/importeer-curriculum.ts",
+    "controleer-build": "tsx scripts/controleer-build.ts"
   },
   "dependencies": {
     "@noble/ed25519": "^3.2.0",
     "idb": "^8.0.4",
     "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "yaml": "^2.9.1",
@@ -30,6 +32,7 @@
     "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "^4.3.5",
     "@types/node": "^26.6.6",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",

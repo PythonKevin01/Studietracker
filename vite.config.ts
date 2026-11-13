@@ -92,9 +92,38 @@ function serviceWorkerPlugin(): Plugin {
   };
 }
 
+/**
+ * Bewaakt bij elke build dat de studentenpagina geen ondertekencode, geen
+ * sleutelbestand-code en geen docentcode bevat. Faalt de build als dat wel zo is.
+ */
+function studentZonderOndertekenen(): Plugin {
+  const verboden = [/src\/bewijscode\/ondertekenen\.ts$/, /src\/bewijscode\/sleutelbestand\.ts$/, /src\/docent\//];
+  return {
+    name: 'studietracker-student-zonder-ondertekenen',
+    apply: 'build',
+    generateBundle(_opties, bundel) {
+      const chunks = Object.values(bundel).filter((b) => b.type === 'chunk');
+      const start = chunks.find((c) => c.isEntry && c.name === 'student');
+      if (!start) this.error('Controle mislukt: de ingang van de studentenpagina is niet gevonden in de build.');
+      const bereikbaar = new Set<string>();
+      const loop = (naam: string) => {
+        if (bereikbaar.has(naam)) return;
+        bereikbaar.add(naam);
+        const c = chunks.find((x) => x.fileName === naam);
+        for (const i of [...(c?.imports ?? []), ...(c?.dynamicImports ?? [])]) loop(i);
+      };
+      loop(start.fileName);
+      const fout = chunks
+        .filter((c) => bereikbaar.has(c.fileName))
+        .flatMap((c) => c.moduleIds.map((m) => m.replace(/\\/g, '/')).filter((m) => verboden.some((v) => v.test(m))).map((m) => `${c.fileName}: ${m}`));
+      if (fout.length) this.error(`De studentenpagina bevat code die alleen voor docenten is:\n${fout.join('\n')}`);
+    },
+  };
+}
+
 export default defineConfig({
   base: './',
-  plugins: [react(), tailwindcss(), curriculumPlugin, sleutelPlugin, serviceWorkerPlugin()],
+  plugins: [react(), tailwindcss(), curriculumPlugin, sleutelPlugin, serviceWorkerPlugin(), studentZonderOndertekenen()],
   build: {
     rollupOptions: {
       input: {
