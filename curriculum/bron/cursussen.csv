@@ -1,0 +1,74 @@
+Periode,Cursus,Jaar,Leerdoel 1,Leerdoel 2,Competentie 1,Competentie 2
+1,3D & Game Art-01,1,LD05: K1 heeft specialistische kennis van software voor mediavormgeving,LD26: K1-W3 Experimenteert met en ontwikkelt de vormgeving,C003: Technische skills,C004: Werktempo
+1,Animation & Design-01,1,"LD34: K2 kan feedback geven, ontvangen en verwerken",LD21: K1 kan content beheren en archiveren,C004: Werktempo,C005: Beroepshouding
+1,Computervaardigheden,1,"LD03: K1 heeft kennis van auteursrecht, licenties en ethische richtlijnen",LD07: K1 heeft specialistische kennis van bestandsformaten,C003: Technische skills,C005: Beroepshouding
+1,Illustratie-01,1,LD21: K1 kan content beheren en archiveren,LD05: K1 heeft specialistische kennis van software voor mediavormgeving,C003: Technische skills,C004: Werktempo
+1,Photoshop-01,1,"LD03: K1 heeft kennis van auteursrecht, licenties en ethische richtlijnen",LD19: K1 kan layout en compositieregels toepassen,C004: Werktempo,C005: Beroepshouding
+1,Projectweek,1,LD24: K1-W1 Onderzoekt en ontwikkelt een creatief concept,LD28: K1-W5 Realiseert en levert de vormgeving op,C006: Samenwerken,C005: Beroepshouding
+1,Social Media-01,1,LD29: K2 heeft kennis van projectmatige werkwijzen,LD20: K1 kan de mediavormgeving op de vereiste mediaplatforms publiceren,C006: Samenwerken,C005: Beroepshouding
+1,Studiecoaching 01,1,LD30: K2 heeft kennis van de eigen drijfveren,LD39: K2 kan reflecteren op eigen kwaliteit en functioneren,C006: Samenwerken,C005: Beroepshouding
+1,Vormgeving-01,1,"LD14: K1 kan onderzoeksgegevens/data analyseren, interpreteren en er conclusies uit trekken","LD08: K1 heeft specialistische kennis van vorm, kleur en typografie",C006: Samenwerken,C002: Kwaliteit leveren
+2,3D & Game Art-02,1,LD01: K1 heeft specialistische kennis van mediavormgeving voor verschillende type media,LD26: K1-W3 Experimenteert met en ontwikkelt de vormgeving,C003: Technische skills,C004: Werktempo
+2,Animation & Design-02,1,LD13: K1 heeft specialistische kennis van trends en ontwikkelingen in de markt,LD05: K1 heeft specialistische kennis van software voor mediavormgeving,C005: Beroepshouding,C004: Werktempo
+2,Illustratie-02,1,LD30: K2 heeft kennis van de eigen drijfveren,LD13: K1 heeft specialistische kennis van trends en ontwikkelingen in de markt,C003: Technische skills,C004: Werktempo
+2,Photoshop-02,1,LD22: K1 kan met gebruiksvriendelijke (A.I.) toepassingen creatieve content maken en/of bewerken,LD07: K1 heeft specialistische kennis van bestandsformaten,C001: Zelfstandigheid,C005: Beroepshouding
+2,Project MV-01,1,-,-,-,-
+2,Projectweek,1,LD24: K1-W1 Onderzoekt en ontwikkelt een creatief concept,LD39: K2 kan reflecteren op eigen kwaliteit en functioneren,C001: Zelfstandigheid,C005: Beroepshouding
+2,Social Media-02,1,LD21: K1 kan content beheren en archiveren,LD10: K1 heeft kennis van interactiedesign,C003: Technische skills,C002: Kwaliteit leveren
+2,Studiecoaching 02,1,LD37: K2 kan de eigen drijfveren en talenten laten zien,LD17: K1 & K2 kan gesprekken voeren met betrokkenen,C006: Samenwerken,C005: Beroepshouding
+2,Vormgeving-02,1,LD19: K1 kan layout en compositieregels toepassen,"LD34: K2 kan feedback geven, ontvangen en verwerken",C003: Technische skills,C001: Zelfstandigheid
+3,After Effects-01,1,LD07: K1 heeft specialistische kennis van bestandsformaten,LD05: K1 heeft specialistische kennis van software voor mediavormgeving,C002: Kwaliteit leveren,C003: Technische skills
+3,Atelier-01,1,LD37: K2 kan de eigen drijfveren en talenten laten zien,LD17: K1 & K2 kan gesprekken voeren met betrokkenen,-,-
+3,Editing-01,1,LD02: K1 heeft kennis van storytelling,LD07: K1 heeft specialistische kennis van bestandsformaten,C006: Samenwerken,C003: Technische skills
+3,Photoshop-03,1,LD09: K1 heeft kennis van (generatieve) AI,"LD23: K1 kan prompts formuleren, structureren en conditioneren",C003: Technische skills,C002: Kwaliteit leveren
+3,Projectweek,1,LD41: K2-W1 Stemt projectvoortgang rond opdrachten af,LD42: K2-W2 Ontwikkelt en onderhoudt de eigen professionaliteit,-,-
+3,Specialisatie Project MV-01 Motion Graphics & Social Media,1,LD02: K1 heeft kennis van storytelling,LD16: K1 kan de vormgeving presenteren en onderbouwen,C004: Werktempo,C005: Beroepshouding
+3,Specialisatie Project MV-01 Motion Graphics & Social Media,1,"LD11: K1 heeft kennis van vormen van gebruikerstesten (bijvoorbeeld enquêtes, prototyping en user testing)",LD04: K1 heeft kennis van marketing en communicatiebegrippen,C004: Werktempo,C005: Beroepshouding
+3,Specialisatie Project MV-01-3D & Game Art,1,LD28: K1-W5 Realiseert en levert de vormgeving op,LD20: K1 kan de mediavormgeving op de vereiste mediaplatforms publiceren,C001: Zelfstandigheid,C004: Werktempo
+3,Specialisatie Project MV-01-3D & Game Art,1,LD28: K1-W5 Realiseert en levert de vormgeving op,LD20: K1 kan de mediavormgeving op de vereiste mediaplatforms publiceren,C001: Zelfstandigheid,C004: Werktempo
+3,Stageorientatie 01,1,LD31: K2 heeft kennis van marketing en branding van zichzelf,LD33: K2 heeft specialistische kennis van netwerken die relevant zijn voor mediavormgeving,C006: Samenwerken,C005: Beroepshouding
+3,Vormgeving-03,1,LD26: K1-W3 Experimenteert met en ontwikkelt de vormgeving,LD28: K1-W5 Realiseert en levert de vormgeving op,C005: Beroepshouding,C004: Werktempo
+3,Zakelijk Engels-03,1,-,-,-,-
+4,After Effects-02,1,LD05: K1 heeft specialistische kennis van software voor mediavormgeving,LD12: K1 heeft specialistische kennis van ontwerpprincipes and -methodieken,C002: Kwaliteit leveren,C003: Technische skills
+4,Atelier-02,1,LD40: K2 kan professioneel communiceren,"LD08: K1 heeft specialistische kennis van vorm, kleur en typografie",-,-
+4,Editing-02,1,LD09: K1 heeft kennis van (generatieve) AI,"LD18: K1 kan feedback geven, ontvangen en verwerken",C005: Beroepshouding,C004: Werktempo
+4,Photoshop-04,1,LD12: K1 heeft specialistische kennis van ontwerpprincipes and -methodieken,LD06: K1 heeft (technische) kennis van verschillende publicatie middelen in de media,C003: Technische skills,C002: Kwaliteit leveren
+4,Projectweek,1,LD27: K1-W4 Test en evalueert prototypes,LD28: K1-W5 Realiseert en levert de vormgeving op,C006: Samenwerken,C005: Beroepshouding
+4,Specialisatie Project MV-01 Motion Graphics & Social Media,1,LD35: K2 kan opdrachten op projectmatige wijze aanpakken,LD32: K2 heeft specialistische kennis van trends en ontwikkelingen in de markt,C003: Technische skills,C002: Kwaliteit leveren
+4,Specialisatie Project MV-01 Motion Graphics & Social Media,1,LD01: K1 heeft specialistische kennis van mediavormgeving voor verschillende type media,"LD11: K1 heeft kennis van vormen van gebruikerstesten (bijvoorbeeld enquêtes, prototyping en user testing)",C004: Werktempo,C002: Kwaliteit leveren
+4,Specialisatie Project MV-01-3D & Game Art,1,LD02: K1 heeft kennis van storytelling,"LD08: K1 heeft specialistische kennis van vorm, kleur en typografie",C005: Beroepshouding,C006: Samenwerken
+4,Specialisatie Project MV-01-3D & Game Art,1,LD02: K1 heeft kennis van storytelling,"LD08: K1 heeft specialistische kennis van vorm, kleur en typografie",C005: Beroepshouding,C006: Samenwerken
+4,Stageorientatie 02,1,LD38: K2 kan een portfolio maken,LD40: K2 kan professioneel communiceren,C002: Kwaliteit leveren,C005: Beroepshouding
+4,Vormgeving-04,1,LD26: K1-W3 Experimenteert met en ontwikkelt de vormgeving,"LD08: K1 heeft specialistische kennis van vorm, kleur en typografie",C003: Technische skills,C002: Kwaliteit leveren
+7,Art & Design-01,2,LD16: K1 kan de vormgeving presenteren en onderbouwen,LD27: K1-W4 Test en evalueert prototypes,C001: Zelfstandigheid,C002: Kwaliteit leveren
+7,Cinematografie-01,2,LD26: K1-W3 Experimenteert met en ontwikkelt de vormgeving,LD28: K1-W5 Realiseert en levert de vormgeving op,C003: Technische skills,C002: Kwaliteit leveren
+7,Concepting & Pitching-01,2,LD24: K1-W1 Onderzoekt en ontwikkelt een creatief concept,LD25: K1-W2 Presenteert en onderbouwt het creatief concept,C006: Samenwerken,C005: Beroepshouding
+7,Kunstgeschiedenis,2,LD22: K1 kan met gebruiksvriendelijke (A.I.) toepassingen creatieve content maken en/of bewerken,"LD23: K1 kan prompts formuleren, structureren en conditioneren",-,-
+7,KZDL Specialisatie 3D & Game Art-01,2,LD24: K1-W1 Onderzoekt en ontwikkelt een creatief concept,LD26: K1-W3 Experimenteert met en ontwikkelt de vormgeving,C001: Zelfstandigheid,C004: Werktempo
+7,KZDL Specialisatie Motion Graphic & Social Designer-01,2,LD02: K1 heeft kennis van storytelling,"LD14: K1 kan onderzoeksgegevens/data analyseren, interpreteren en er conclusies uit trekken",C004: Werktempo,C002: Kwaliteit leveren
+7,Marketing-01,2,-,-,-,-
+7,Na het MBO,2,LD30: K2 heeft kennis van de eigen drijfveren,LD39: K2 kan reflecteren op eigen kwaliteit en functioneren,C005: Beroepshouding,C001: Zelfstandigheid
+7,Studiecoaching-07,2,LD30: K2 heeft kennis van de eigen drijfveren,LD39: K2 kan reflecteren op eigen kwaliteit en functioneren,C005: Beroepshouding,C001: Zelfstandigheid
+7,Vormgeving-05,2,-,-,-,-
+8,Art&Design-02,2,-,-,-,-
+8,Cinematografie-02,2,-,-,-,-
+8,Internationaal Samenwerkingsproject-01,2,LD20: K1 kan de mediavormgeving op de vereiste mediaplatforms publiceren,LD17: K1 & K2 kan gesprekken voeren met betrokkenen,C006: Samenwerken,C005: Beroepshouding
+8,KZDL Specialisatie Examen 3D & Game Art-01,2,LD25: K1-W2 Presenteert en onderbouwt het creatief concept,LD29: K2 heeft kennis van projectmatige werkwijzen,C005: Beroepshouding,C002: Kwaliteit leveren
+8,KZDL Specialisatie Examen Social & Motion Graphics-0.1,2,LD27: K1-W4 Test en evalueert prototypes,LD17: K1 & K2 kan gesprekken voeren met betrokkenen,C002: Kwaliteit leveren,C004: Werktempo
+8,Projectdag MV-01,2,"LD18: K1 kan feedback geven, ontvangen en verwerken",LD35: K2 kan opdrachten op projectmatige wijze aanpakken,C002: Kwaliteit leveren,C003: Technische skills
+8,Studiecoaching-08,2,LD30: K2 heeft kennis van de eigen drijfveren,LD39: K2 kan reflecteren op eigen kwaliteit en functioneren,-,-
+8,Vormgeving-06,2,-,-,-,-
+8,Zakelijk Engels-02,2,LD13: K1 heeft specialistische kennis van trends en ontwikkelingen in de markt,LD16: K1 kan de vormgeving presenteren en onderbouwen,C002: Kwaliteit leveren,C005: Beroepshouding
+9,KZD Corporate Design-01,3,LD15: K1 kan een markt -en doelgroeponderzoek uitvoeren,LD35: K2 kan opdrachten op projectmatige wijze aanpakken,C004: Werktempo,C001: Zelfstandigheid
+9,Ondernemingsvaardigheden,3,LD33: K2 heeft specialistische kennis van netwerken die relevant zijn voor mediavormgeving,LD36: K1 & K2 kan diens uren/kosten begroten en verantwoorden,C004: Werktempo,C001: Zelfstandigheid
+9,Portfolio Builder-01,3,LD38: K2 kan een portfolio maken,LD39: K2 kan reflecteren op eigen kwaliteit en functioneren,C001: Zelfstandigheid,C005: Beroepshouding
+9,Portfolio opdracht 3d,3,LD12: K1 heeft specialistische kennis van ontwerpprincipes and -methodieken,LD37: K2 kan de eigen drijfveren en talenten laten zien,C004: Werktempo,C002: Kwaliteit leveren
+9,Portfolio opdracht Motion Graphics,3,LD35: K2 kan opdrachten op projectmatige wijze aanpakken,LD28: K1-W5 Realiseert en levert de vormgeving op,C002: Kwaliteit leveren,C003: Technische skills
+9,Portfolio Weekstart,3,LD27: K1-W4 Test en evalueert prototypes,LD28: K1-W5 Realiseert en levert de vormgeving op,C006: Samenwerken,C005: Beroepshouding
+9,Stage Oriëntatie,3,LD43: K2-W3 Profileert zich als mediavormgever,LD39: K2 kan reflecteren op eigen kwaliteit en functioneren,C005: Beroepshouding,C001: Zelfstandigheid
+9,Stage Orientatie-03,3,-,-,-,-
+10,Beroepsbeeld-01,3,LD32: K2 heeft specialistische kennis van trends en ontwikkelingen in de markt,LD33: K2 heeft specialistische kennis van netwerken die relevant zijn voor mediavormgeving,C005: Beroepshouding,-
+10,KZD Corporate Design-02,3,LD16: K1 kan de vormgeving presenteren en onderbouwen,LD09: K1 heeft kennis van (generatieve) AI,C005: Beroepshouding,C002: Kwaliteit leveren
+10,Pre-Expo Projects,3,LD41: K2-W1 Stemt projectvoortgang rond opdrachten af,-,C006: Samenwerken,C004: Werktempo
+10,Sluitstuk 3D Designer,3,LD27: K1-W4 Test en evalueert prototypes,LD42: K2-W2 Ontwikkelt en onderhoudt de eigen professionaliteit,C001: Zelfstandigheid,C005: Beroepshouding
+10,Sluitstuk Motion Graphic Designer,3,LD41: K2-W1 Stemt projectvoortgang rond opdrachten af,LD43: K2-W3 Profileert zich als mediavormgever,-,-

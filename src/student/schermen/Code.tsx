@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import type { Controle } from '../../bewijscode/controleren';
-import { curriculum, leesbareDatum, opdrachtOpNr, publiekeSleutels } from '../../gedeeld/curriculum';
+import { curriculum, leesbareDatum, opdrachtOpNr, publiekeSleutels, volledigeOpdrachtNaam } from '../../gedeeld/curriculum';
 import { Scan, Zegel } from '../../gedeeld/iconen';
 import { Kaart, Kop, Melding, OpdrachtStatusLabel, hoofdknop, tweedeKnop } from '../../gedeeld/onderdelen';
 import type { SchermProps } from '../App';
@@ -117,7 +117,7 @@ function Uitkomst({ controle }: { controle: Controle }) {
           const opdracht = opdrachtOpNr.get(r.opdrachtNr)!;
           return (
             <li key={r.opdrachtNr} className="rounded-xl bg-stone-50 p-3">
-              <p className="font-medium">{opdracht.titel}</p>
+              <p className="font-medium">{volledigeOpdrachtNaam(opdracht)}</p>
               <div className="mt-2">
                 {r.resultaat === 'voldaan' ? (
                   <OpdrachtStatusLabel status="bevestigd" stempel />

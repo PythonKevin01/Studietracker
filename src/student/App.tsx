@@ -9,7 +9,7 @@ import { DossierScherm } from './schermen/Dossier';
 import { OpleidingScherm } from './schermen/Opleiding';
 import { RapportScherm } from './schermen/Rapport';
 import { StartScherm } from './schermen/Start';
-import { VakScherm } from './schermen/Vak';
+import { CursusScherm } from './schermen/Cursus';
 
 export interface SchermProps {
   gegevens: StudentGegevens;
@@ -77,8 +77,8 @@ function Scherm(p: SchermProps & { route: Route; wis: () => Promise<void>; wacht
   switch (p.route.scherm) {
     case 'opleiding':
       return <OpleidingScherm {...p} />;
-    case 'vak':
-      return <VakScherm {...p} vakId={p.route.vakId} />;
+    case 'cursus':
+      return <CursusScherm {...p} cursusId={p.route.cursusId} />;
     case 'dossier':
       return <DossierScherm {...p} />;
     case 'code':
@@ -89,7 +89,7 @@ function Scherm(p: SchermProps & { route: Route; wis: () => Promise<void>; wacht
 }
 
 const MENU = [
-  { hash: '#/', label: 'Opleiding', schermen: ['opleiding', 'vak'], Icoon: Huis },
+  { hash: '#/', label: 'Opleiding', schermen: ['opleiding', 'cursus'], Icoon: Huis },
   { hash: '#/dossier', label: 'Dossier', schermen: ['dossier'], Icoon: Dossier },
   { hash: '#/code', label: 'Code', schermen: ['code'], Icoon: Scan },
   { hash: '#/rapport', label: 'Rapport', schermen: ['rapport'], Icoon: Rapport },

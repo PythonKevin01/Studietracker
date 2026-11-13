@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export type Route =
   | { scherm: 'opleiding' }
-  | { scherm: 'vak'; vakId: string }
+  | { scherm: 'cursus'; cursusId: string }
   | { scherm: 'dossier' }
   | { scherm: 'code' }
   | { scherm: 'rapport' };
@@ -10,8 +10,8 @@ export type Route =
 export function leesRoute(hash: string): Route {
   const delen = hash.replace(/^#\/?/, '').split('/').filter(Boolean);
   switch (delen[0]) {
-    case 'vak':
-      return delen[1] ? { scherm: 'vak', vakId: decodeURIComponent(delen[1]) } : { scherm: 'opleiding' };
+    case 'cursus':
+      return delen[1] ? { scherm: 'cursus', cursusId: decodeURIComponent(delen[1]) } : { scherm: 'opleiding' };
     case 'dossier':
       return { scherm: 'dossier' };
     case 'code':

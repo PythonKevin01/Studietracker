@@ -1,7 +1,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import type { Niveau } from '../curriculum/schema';
-import { LEERDOEL_LABEL, NIVEAU_LABEL, OPDRACHT_LABEL, type LeerdoelStatus, type OpdrachtStatus } from '../rekenregels';
-import { Fout, Half, Leeg, Let, Zegel, ZelfGemeld } from './iconen';
+import { CURSUS_LABEL, LEERDOEL_LABEL, NIVEAU_LABEL, OPDRACHT_LABEL, type CursusStatus, type LeerdoelStatus, type OpdrachtStatus } from '../rekenregels';
+import { DubbelZegel, Fout, Half, Leeg, Let, Streep, Zegel, ZelfGemeld } from './iconen';
 
 const STATUSVORM = 'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-sm font-medium whitespace-nowrap';
 
@@ -27,13 +27,49 @@ export function OpdrachtStatusLabel({ status, stempel = false }: { status: Opdra
   );
 }
 
-export function LeerdoelStatusLabel({ status, aantal }: { status: LeerdoelStatus; aantal?: number }) {
+/**
+ * Status van een leerdoel. Met `behaaldIn` (over de hele opleiding): vanaf
+ * 2 cursussen heet het "versterkt".
+ */
+export function LeerdoelStatusLabel({ status, aantal, behaaldIn }: { status: LeerdoelStatus; aantal?: number; behaaldIn?: number }) {
+  if (status === 'behaald' && behaaldIn !== undefined && behaaldIn > 1) {
+    return (
+      <span className={`${STATUSVORM} border-2 border-emerald-800 bg-emerald-100 text-emerald-950`}>
+        <DubbelZegel />
+        Versterkt · {behaaldIn}× behaald
+      </span>
+    );
+  }
   const { klasse, Icoon } = LEERDOEL_STIJL[status];
   return (
     <span className={`${STATUSVORM} ${klasse}`}>
       <Icoon />
       {aantal !== undefined && <span className="tabular-nums">{aantal}</span>}
       {LEERDOEL_LABEL[status].replace(/^./, (l) => (aantal !== undefined ? l.toLowerCase() : l))}
+    </span>
+  );
+}
+
+export function VersterktLabel({ aantal }: { aantal: number }) {
+  return (
+    <span className={`${STATUSVORM} border-2 border-emerald-800 bg-emerald-100 text-emerald-950`}>
+      <DubbelZegel />
+      <span className="tabular-nums">{aantal}</span> versterkt
+    </span>
+  );
+}
+
+const CURSUS_STIJL: Record<CursusStatus, { klasse: string; Icoon: typeof Leeg }> = {
+  ...LEERDOEL_STIJL,
+  geen_leerdoelen: { klasse: 'border-stone-400 border-dashed bg-stone-50 text-stone-700', Icoon: Streep },
+};
+
+export function CursusStatusLabel({ status }: { status: CursusStatus }) {
+  const { klasse, Icoon } = CURSUS_STIJL[status];
+  return (
+    <span className={`${STATUSVORM} ${klasse}`}>
+      <Icoon />
+      {CURSUS_LABEL[status]}
     </span>
   );
 }
@@ -121,7 +157,7 @@ export function Voettekst() {
     <footer className="mx-auto mt-10 max-w-xl px-4 pb-6 text-sm text-stone-700 print-breed">
       <p className="font-semibold">Dit is een ontwikkeloverzicht, geen examinering.</p>
       <p className="mt-1">
-        <DemoLabel /> Proefversie met verzonnen opdrachten en koppelingen. Geen officieel onderwijsprogramma.
+        <DemoLabel /> Proefversie: de opdrachten zijn verzonnen. Cursussen en leerdoelen komen uit het cursusoverzicht van de opleiding.
       </p>
     </footer>
   );

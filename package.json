@@ -13,7 +13,8 @@
     "demo": "tsx scripts/demo.ts sleutel --als-nodig && npm run build && vite preview --host",
     "demo:sleutel": "tsx scripts/demo.ts sleutel",
     "sleutel:nieuw": "tsx scripts/demo.ts nieuw",
-    "code": "tsx scripts/demo.ts code"
+    "code": "tsx scripts/demo.ts code",
+    "curriculum": "tsx scripts/importeer-curriculum.ts"
   },
   "dependencies": {
     "@noble/ed25519": "^3.2.0",

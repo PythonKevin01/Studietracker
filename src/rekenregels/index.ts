@@ -3,10 +3,14 @@
  * naast de uitkomst ook `waarom` terug: gewone zinnen die de uitkomst
  * onderbouwen en die de app achter "Waarom?" toont.
  *
+ * Keten: opdracht -> leerdoel (binnen een cursus) -> kerntaak. Een werkproces
+ * krijgt alleen voortgang via het leerdoel dat dat werkproces zelf is (LD24 =
+ * B1-K1-W1 enz.); andere koppelingen tussen leerdoel en werkproces bestaan niet.
+ *
  * Bewust is er geen eindstatus voor werkprocessen of kerntaken: dit is een
  * ontwikkeloverzicht, geen examinering.
  */
-import { NIVEAUS, type Curriculum, type Niveau, type Opdracht, type Vak } from '../curriculum/schema';
+import { NIVEAUS, type Curriculum, type Cursus, type Leerdoel, type Niveau } from '../curriculum/schema';
 
 export type OpdrachtStatus = 'open' | 'zelf_gemeld' | 'bevestigd';
 export type LeerdoelStatus = 'nog_niet_gestart' | 'bezig' | 'behaald';
@@ -47,11 +51,13 @@ function statusVan(voortgang: Voortgang, opdrachtId: string): OpdrachtStatus {
   return voortgang[opdrachtId] ?? 'open';
 }
 
-function vindVakVanLeerdoel(c: Curriculum, leerdoelId: string): Vak {
-  const vak = c.vakken.find((v) => v.leerdoelen.some((l) => l.id === leerdoelId));
-  if (!vak) throw new Error(`Onbekend leerdoel: ${leerdoelId}`);
-  return vak;
+function vind<T extends { id: string }>(lijst: readonly T[], id: string, soort: string): T {
+  const x = lijst.find((i) => i.id === id);
+  if (!x) throw new Error(`Onbekend(e) ${soort}: ${id}`);
+  return x;
 }
+
+export const cursusNaam = (c: Pick<Cursus, 'titel' | 'periode'>) => `${c.titel} (periode ${c.periode})`;
 
 export interface OpdrachtRegel {
   opdrachtId: string;
@@ -60,7 +66,14 @@ export interface OpdrachtRegel {
   status: OpdrachtStatus;
 }
 
-export interface LeerdoelUitkomst {
+function regelTekst(r: OpdrachtRegel): string {
+  return `${r.titel} (${r.niveau}, ${NIVEAU_LABEL[r.niveau]}): ${OPDRACHT_LABEL[r.status].toLowerCase()}`;
+}
+
+// --- Leerdoel binnen één cursus ------------------------------------------
+
+export interface LeerdoelInCursus {
+  cursusId: string;
   leerdoelId: string;
   titel: string;
   status: LeerdoelStatus;
@@ -69,21 +82,16 @@ export interface LeerdoelUitkomst {
   waarom: string[];
 }
 
-function regelTekst(r: OpdrachtRegel): string {
-  return `${r.titel} (${r.niveau}, ${NIVEAU_LABEL[r.niveau]}): ${OPDRACHT_LABEL[r.status].toLowerCase()}`;
-}
-
 /**
- * Leerdoel:
- * - "behaald" als alle B-opdrachten bevestigd zijn;
+ * Leerdoel in een cursus:
+ * - "behaald" als alle B-opdrachten van die cursus voor dit leerdoel bevestigd zijn;
  * - anders "bezig" bij minstens één zelf gemelde of bevestigde opdracht;
  * - anders "nog niet gestart".
  */
-export function leerdoelUitkomst(c: Curriculum, leerdoelId: string, voortgang: Voortgang): LeerdoelUitkomst {
-  const vak = vindVakVanLeerdoel(c, leerdoelId);
-  const leerdoel = vak.leerdoelen.find((l) => l.id === leerdoelId)!;
-
-  const opdrachten: OpdrachtRegel[] = vak.opdrachten.flatMap((o) =>
+export function leerdoelInCursus(c: Curriculum, cursusId: string, leerdoelId: string, voortgang: Voortgang): LeerdoelInCursus {
+  const cursus = vind(c.cursussen, cursusId, 'cursus');
+  const leerdoel = vind(c.leerdoelen, leerdoelId, 'leerdoel');
+  const opdrachten: OpdrachtRegel[] = cursus.opdrachten.flatMap((o) =>
     o.leerdoelen
       .filter((k) => k.leerdoel === leerdoelId)
       .map((k) => ({ opdrachtId: o.id, titel: o.titel, niveau: k.niveau, status: statusVan(voortgang, o.id) })),
@@ -99,9 +107,7 @@ export function leerdoelUitkomst(c: Curriculum, leerdoelId: string, voortgang: V
   // een leerdoel zonder B-opdrachten ooit vanzelf "behaald" wordt.
   if (beoordeeld.length > 0 && bevestigdB.length === beoordeeld.length) {
     status = 'behaald';
-    waarom.push(
-      `Behaald: alle ${beoordeeld.length} opdracht(en) op niveau B (beoordeeld) zijn door een docent bevestigd.`,
-    );
+    waarom.push(`Behaald in deze cursus: alle ${beoordeeld.length} opdracht(en) op niveau B (beoordeeld) zijn door een docent bevestigd.`);
   } else if (gestart.length > 0) {
     status = 'bezig';
     waarom.push(
@@ -110,12 +116,58 @@ export function leerdoelUitkomst(c: Curriculum, leerdoelId: string, voortgang: V
     );
   } else {
     status = 'nog_niet_gestart';
-    waarom.push('Nog niet gestart: geen enkele opdracht bij dit leerdoel is zelf gemeld of bevestigd.');
+    waarom.push('Nog niet gestart: geen enkele opdracht voor dit leerdoel in deze cursus is zelf gemeld of bevestigd.');
   }
   for (const o of opdrachten) waarom.push(regelTekst(o));
 
-  return { leerdoelId, titel: leerdoel.titel, status, label: LEERDOEL_LABEL[status], opdrachten, waarom };
+  return { cursusId, leerdoelId, titel: leerdoel.titel, status, label: LEERDOEL_LABEL[status], opdrachten, waarom };
 }
+
+// --- Leerdoel over de hele opleiding --------------------------------------
+
+export interface LeerdoelTotaal {
+  leerdoelId: string;
+  titel: string;
+  leerdoel: Leerdoel;
+  status: LeerdoelStatus;
+  /** Aantal cursussen waarin het leerdoel is behaald. Vanaf 2 is het "versterkt". */
+  behaaldIn: number;
+  perCursus: (LeerdoelInCursus & { cursusNaam: string })[];
+  waarom: string[];
+}
+
+/**
+ * Hetzelfde leerdoel kan in meerdere cursussen terugkomen. Het is behaald
+ * zodra het in één cursus behaald is; elke volgende cursus waarin het
+ * behaald wordt, versterkt het.
+ */
+export function leerdoelTotaal(c: Curriculum, leerdoelId: string, voortgang: Voortgang): LeerdoelTotaal {
+  const leerdoel = vind(c.leerdoelen, leerdoelId, 'leerdoel');
+  const perCursus = c.cursussen
+    .filter((cu) => cu.leerdoelen.includes(leerdoelId))
+    .map((cu) => ({ ...leerdoelInCursus(c, cu.id, leerdoelId, voortgang), cursusNaam: cursusNaam(cu) }));
+  const behaald = perCursus.filter((p) => p.status === 'behaald');
+  const bezig = perCursus.filter((p) => p.status === 'bezig');
+  const status: LeerdoelStatus = behaald.length > 0 ? 'behaald' : bezig.length > 0 ? 'bezig' : 'nog_niet_gestart';
+
+  const waarom: string[] = [`Aangeboden in ${perCursus.length} cursus(sen).`];
+  if (status === 'behaald') {
+    waarom.push(
+      behaald.length > 1
+        ? `Behaald en ${behaald.length - 1} keer versterkt: behaald in ${behaald.length} cursussen.`
+        : 'Behaald in 1 cursus. Elke volgende cursus waarin je het behaalt, versterkt het.',
+    );
+  } else if (status === 'bezig') {
+    waarom.push('Bezig: in minstens één cursus is een opdracht voor dit leerdoel zelf gemeld of bevestigd, maar het is nog nergens behaald.');
+  } else {
+    waarom.push('Nog niet gestart: in geen enkele cursus is een opdracht voor dit leerdoel zelf gemeld of bevestigd.');
+  }
+  for (const p of perCursus) waarom.push(`${p.cursusNaam}: ${p.label.toLowerCase()}`);
+
+  return { leerdoelId, titel: leerdoel.titel, leerdoel, status, behaaldIn: behaald.length, perCursus, waarom };
+}
+
+// --- Tellers per niveau ---------------------------------------------------
 
 export interface Teller {
   totaal: number;
@@ -133,58 +185,43 @@ function legeTellers(): Tellers {
   };
 }
 
-export interface WerkprocesBijdrage extends OpdrachtRegel {
-  /** Leerdoelen waarlangs deze opdracht bij het werkproces uitkomt. */
+export interface Bijdrage extends OpdrachtRegel {
+  cursusNaam: string;
   viaLeerdoelen: string[];
 }
 
-export interface WerkprocesUitkomst {
-  werkprocesId: string;
-  titel: string;
-  tellers: Tellers;
-  bijdragen: WerkprocesBijdrage[];
-  waarom: string[];
-}
-
 /**
- * Opdrachten die via een leerdoel bij een van de gegeven werkprocessen
- * uitkomen. Elke opdracht telt één keer, op het hoogste niveau waarop hij
- * aan zo'n leerdoel hangt.
+ * Opdrachten die aan minstens één van de gegeven leerdoelen hangen. Elke
+ * opdracht telt één keer, op het hoogste niveau waarop hij aan zo'n leerdoel hangt.
  */
-function bijdragenVoor(c: Curriculum, werkprocesIds: ReadonlySet<string>, voortgang: Voortgang): WerkprocesBijdrage[] {
-  const bijdragen: WerkprocesBijdrage[] = [];
-  for (const vak of c.vakken) {
-    const relevant = new Set(
-      vak.leerdoelen.filter((l) => l.werkprocessen.some((w) => werkprocesIds.has(w))).map((l) => l.id),
-    );
-    for (const o of vak.opdrachten) {
-      const koppelingen = o.leerdoelen.filter((k) => relevant.has(k.leerdoel));
+function bijdragenVoor(c: Curriculum, leerdoelIds: ReadonlySet<string>, voortgang: Voortgang): Bijdrage[] {
+  const uit: Bijdrage[] = [];
+  for (const cu of c.cursussen) {
+    for (const o of cu.opdrachten) {
+      const koppelingen = o.leerdoelen.filter((k) => leerdoelIds.has(k.leerdoel));
       if (koppelingen.length === 0) continue;
-      const niveau = koppelingen.reduce<Niveau>(
-        (hoogste, k) => (NIVEAU_RANG[k.niveau] > NIVEAU_RANG[hoogste] ? k.niveau : hoogste),
-        'O',
-      );
-      bijdragen.push({
+      const niveau = koppelingen.reduce<Niveau>((h, k) => (NIVEAU_RANG[k.niveau] > NIVEAU_RANG[h] ? k.niveau : h), 'O');
+      uit.push({
         opdrachtId: o.id,
         titel: o.titel,
         niveau,
         status: statusVan(voortgang, o.id),
+        cursusNaam: cursusNaam(cu),
         viaLeerdoelen: koppelingen.map((k) => k.leerdoel),
       });
     }
   }
-  return bijdragen;
+  return uit;
 }
 
-function tel(bijdragen: readonly WerkprocesBijdrage[]): Tellers {
-  const tellers = legeTellers();
+function tel(bijdragen: readonly Bijdrage[]): Tellers {
+  const t = legeTellers();
   for (const b of bijdragen) {
-    const t = tellers[b.niveau];
-    t.totaal += 1;
-    if (b.status === 'zelf_gemeld') t.zelfGemeld += 1;
-    if (b.status === 'bevestigd') t.bevestigd += 1;
+    t[b.niveau].totaal += 1;
+    if (b.status === 'zelf_gemeld') t[b.niveau].zelfGemeld += 1;
+    if (b.status === 'bevestigd') t[b.niveau].bevestigd += 1;
   }
-  return tellers;
+  return t;
 }
 
 function tellerZinnen(tellers: Tellers): string[] {
@@ -194,21 +231,34 @@ function tellerZinnen(tellers: Tellers): string[] {
   });
 }
 
-/** Werkproces: tellers per niveau, met zelf gemeld en bevestigd apart. */
+// --- Werkproces en kerntaak -----------------------------------------------
+
+export interface WerkprocesUitkomst {
+  werkprocesId: string;
+  titel: string;
+  /** Het leerdoel dat dit werkproces zelf is (bijv. LD24 voor B1-K1-W1), als dat er is. */
+  leerdoel: LeerdoelTotaal | null;
+  tellers: Tellers;
+  waarom: string[];
+}
+
+/** Werkproces: tellers per niveau, met zelf gemeld en bevestigd apart, via het eigen leerdoel. */
 export function werkprocesUitkomst(c: Curriculum, werkprocesId: string, voortgang: Voortgang): WerkprocesUitkomst {
-  const werkproces = c.kerntaken.flatMap((k) => k.werkprocessen).find((w) => w.id === werkprocesId);
-  if (!werkproces) throw new Error(`Onbekend werkproces: ${werkprocesId}`);
-
-  const bijdragen = bijdragenVoor(c, new Set([werkprocesId]), voortgang);
+  const werkproces = vind(c.kerntaken.flatMap((k) => k.werkprocessen), werkprocesId, 'werkproces');
+  const eigen = c.leerdoelen.filter((l) => l.werkproces === werkprocesId);
+  const bijdragen = bijdragenVoor(c, new Set(eigen.map((l) => l.id)), voortgang);
   const tellers = tel(bijdragen);
-  const waarom = [
-    'Een opdracht telt mee als hij hoort bij een leerdoel dat aan dit werkproces is gekoppeld. Elke opdracht telt één keer, op zijn hoogste niveau.',
-    ...tellerZinnen(tellers),
-    ...bijdragen.map((b) => `${regelTekst(b)}, via ${b.viaLeerdoelen.join(' en ')}`),
-  ];
-  if (bijdragen.length === 0) waarom.push('Er zijn nog geen opdrachten aan dit werkproces gekoppeld.');
+  const leerdoel = eigen[0] ? leerdoelTotaal(c, eigen[0].id, voortgang) : null;
 
-  return { werkprocesId, titel: werkproces.titel, tellers, bijdragen, waarom };
+  const waarom = eigen.length
+    ? [
+        `Voortgang komt van leerdoel ${eigen.map((l) => l.id).join(' en ')}: dat leerdoel is dit werkproces. Andere leerdoelen zijn niet vast aan een werkproces gekoppeld.`,
+        ...tellerZinnen(tellers),
+        ...bijdragen.map((b) => `${b.cursusNaam}, ${regelTekst(b)}`),
+      ]
+    : ['Er is geen leerdoel dat bij dit werkproces hoort. Daarom is hier geen voortgang te zien.'];
+
+  return { werkprocesId, titel: werkproces.titel, leerdoel, tellers, waarom };
 }
 
 export interface KerntaakUitkomst {
@@ -216,59 +266,121 @@ export interface KerntaakUitkomst {
   titel: string;
   tellers: Tellers;
   werkprocessen: WerkprocesUitkomst[];
+  /** Vakkennis en vaardigheden: leerdoelen van deze kerntaak die geen werkproces zijn. */
+  leerdoelen: LeerdoelTotaal[];
+  aantal: Record<LeerdoelStatus, number> & { versterkt: number };
   waarom: string[];
 }
 
-/** Kerntaak: dezelfde tellers, over alle werkprocessen samen (elke opdracht één keer). */
+/** Kerntaak: tellers over alle leerdoelen van de kerntaak samen (elke opdracht één keer). */
 export function kerntaakUitkomst(c: Curriculum, kerntaakId: string, voortgang: Voortgang): KerntaakUitkomst {
-  const kerntaak = c.kerntaken.find((k) => k.id === kerntaakId);
-  if (!kerntaak) throw new Error(`Onbekende kerntaak: ${kerntaakId}`);
-
-  const ids = new Set(kerntaak.werkprocessen.map((w) => w.id));
-  const tellers = tel(bijdragenVoor(c, ids, voortgang));
+  const kerntaak = vind(c.kerntaken, kerntaakId, 'kerntaak');
+  const eigen = c.leerdoelen.filter((l) => l.kerntaken.includes(kerntaakId));
+  const tellers = tel(bijdragenVoor(c, new Set(eigen.map((l) => l.id)), voortgang));
+  const leerdoelen = eigen.filter((l) => l.werkproces === undefined).map((l) => leerdoelTotaal(c, l.id, voortgang));
+  const alle = eigen.map((l) => leerdoelTotaal(c, l.id, voortgang));
+  const aantal = { nog_niet_gestart: 0, bezig: 0, behaald: 0, versterkt: 0 };
+  for (const l of alle) {
+    aantal[l.status] += 1;
+    if (l.behaaldIn > 1) aantal.versterkt += 1;
+  }
   return {
     kerntaakId,
     titel: kerntaak.titel,
     tellers,
     werkprocessen: kerntaak.werkprocessen.map((w) => werkprocesUitkomst(c, w.id, voortgang)),
+    leerdoelen,
+    aantal,
     waarom: [
-      `Opgeteld over ${kerntaak.werkprocessen.length} werkprocessen. Een opdracht die bij meer werkprocessen hoort, telt hier één keer.`,
+      `Deze kerntaak heeft ${eigen.length} leerdoelen (in het kwalificatiedossier: vakkennis, vaardigheden en de werkprocessen zelf).`,
+      `Leerdoelen: ${aantal.behaald} behaald (waarvan ${aantal.versterkt} versterkt), ${aantal.bezig} bezig, ${aantal.nog_niet_gestart} nog niet gestart.`,
+      'Een opdracht die aan meer leerdoelen van deze kerntaak hangt, telt hier één keer.',
       ...tellerZinnen(tellers),
     ],
   };
 }
 
-export interface VakUitkomst {
-  vakId: string;
-  titel: string;
-  leerdoelen: LeerdoelUitkomst[];
+// --- Cursus en opleiding --------------------------------------------------
+
+export type CursusStatus = LeerdoelStatus | 'geen_leerdoelen';
+
+export const CURSUS_LABEL: Record<CursusStatus, string> = {
+  nog_niet_gestart: 'Nog niet gestart',
+  bezig: 'Bezig',
+  behaald: 'Leerdoelen behaald',
+  geen_leerdoelen: 'Geen leerdoelen',
+};
+
+export interface CursusUitkomst {
+  cursus: Cursus;
+  status: CursusStatus;
+  leerdoelen: LeerdoelInCursus[];
   aantalLeerdoelen: Record<LeerdoelStatus, number>;
   aantalOpdrachten: Record<OpdrachtStatus, number>;
   waarom: string[];
 }
 
-/** Vak: alleen optellingen van leerdoelen en opdrachten, geen eigen eindstatus. */
-export function vakUitkomst(c: Curriculum, vakId: string, voortgang: Voortgang): VakUitkomst {
-  const vak = c.vakken.find((v) => v.id === vakId);
-  if (!vak) throw new Error(`Onbekend vak: ${vakId}`);
-
-  const leerdoelen = vak.leerdoelen.map((l) => leerdoelUitkomst(c, l.id, voortgang));
+/** Cursus: telt leerdoelen en opdrachten op. "Leerdoelen behaald" als alle leerdoelen van de cursus behaald zijn. */
+export function cursusUitkomst(c: Curriculum, cursusId: string, voortgang: Voortgang): CursusUitkomst {
+  const cursus = vind(c.cursussen, cursusId, 'cursus');
+  const leerdoelen = cursus.leerdoelen.map((l) => leerdoelInCursus(c, cursusId, l, voortgang));
   const aantalLeerdoelen: Record<LeerdoelStatus, number> = { nog_niet_gestart: 0, bezig: 0, behaald: 0 };
   for (const l of leerdoelen) aantalLeerdoelen[l.status] += 1;
   const aantalOpdrachten: Record<OpdrachtStatus, number> = { open: 0, zelf_gemeld: 0, bevestigd: 0 };
-  for (const o of vak.opdrachten) aantalOpdrachten[statusVan(voortgang, o.id)] += 1;
+  for (const o of cursus.opdrachten) aantalOpdrachten[statusVan(voortgang, o.id)] += 1;
+
+  let status: CursusStatus;
+  if (leerdoelen.length === 0) status = 'geen_leerdoelen';
+  else if (aantalLeerdoelen.behaald === leerdoelen.length) status = 'behaald';
+  else if (aantalOpdrachten.bevestigd + aantalOpdrachten.zelf_gemeld > 0) status = 'bezig';
+  else status = 'nog_niet_gestart';
+
+  const waarom =
+    status === 'geen_leerdoelen'
+      ? ['Voor deze cursus staan in het cursusoverzicht geen leerdoelen. Er is hier dus geen voortgang bij te houden.']
+      : [
+          `Leerdoelen in deze cursus: ${aantalLeerdoelen.behaald} behaald, ${aantalLeerdoelen.bezig} bezig, ${aantalLeerdoelen.nog_niet_gestart} nog niet gestart (van ${leerdoelen.length}).`,
+          `Opdrachten: ${aantalOpdrachten.bevestigd} bevestigd, ${aantalOpdrachten.zelf_gemeld} zelf gemeld, ${aantalOpdrachten.open} open (van ${cursus.opdrachten.length}).`,
+        ];
+  return { cursus, status, leerdoelen, aantalLeerdoelen, aantalOpdrachten, waarom };
+}
+
+export interface OpleidingUitkomst {
+  jaren: { jaar: number; perioden: { periode: number; cursussen: CursusUitkomst[] }[] }[];
+  leerdoelen: Record<LeerdoelStatus, number> & { totaal: number; versterkt: number };
+  opdrachten: Record<OpdrachtStatus, number>;
+  waarom: string[];
+}
+
+/** Totaaloverzicht: alle cursussen per jaar en periode, en alle leerdoelen samen. */
+export function opleidingUitkomst(c: Curriculum, voortgang: Voortgang): OpleidingUitkomst {
+  const uitkomsten = c.cursussen.map((cu) => cursusUitkomst(c, cu.id, voortgang));
+  const jaren = [...new Set(c.cursussen.map((cu) => cu.jaar))]
+    .sort((a, b) => a - b)
+    .map((jaar) => ({
+      jaar,
+      perioden: [...new Set(c.cursussen.filter((cu) => cu.jaar === jaar).map((cu) => cu.periode))]
+        .sort((a, b) => a - b)
+        .map((periode) => ({ periode, cursussen: uitkomsten.filter((u) => u.cursus.jaar === jaar && u.cursus.periode === periode) })),
+    }));
+
+  const leerdoelen = { nog_niet_gestart: 0, bezig: 0, behaald: 0, totaal: c.leerdoelen.length, versterkt: 0 };
+  for (const l of c.leerdoelen) {
+    const t = leerdoelTotaal(c, l.id, voortgang);
+    leerdoelen[t.status] += 1;
+    if (t.behaaldIn > 1) leerdoelen.versterkt += 1;
+  }
+  const opdrachten: Record<OpdrachtStatus, number> = { open: 0, zelf_gemeld: 0, bevestigd: 0 };
+  for (const u of uitkomsten) for (const s of ['open', 'zelf_gemeld', 'bevestigd'] as const) opdrachten[s] += u.aantalOpdrachten[s];
 
   return {
-    vakId,
-    titel: vak.titel,
+    jaren,
     leerdoelen,
-    aantalLeerdoelen,
-    aantalOpdrachten,
+    opdrachten,
     waarom: [
-      `Leerdoelen: ${aantalLeerdoelen.behaald} behaald, ${aantalLeerdoelen.bezig} bezig, ${aantalLeerdoelen.nog_niet_gestart} nog niet gestart (van ${leerdoelen.length}).`,
-      `Opdrachten: ${aantalOpdrachten.bevestigd} bevestigd, ${aantalOpdrachten.zelf_gemeld} zelf gemeld, ${aantalOpdrachten.open} open (van ${vak.opdrachten.length}).`,
+      `Leerdoelen: ${leerdoelen.behaald} van de ${leerdoelen.totaal} behaald, waarvan ${leerdoelen.versterkt} versterkt (in meer dan één cursus behaald). ${leerdoelen.bezig} bezig, ${leerdoelen.nog_niet_gestart} nog niet gestart.`,
+      'Een leerdoel is behaald zodra je het in één cursus hebt behaald. Elke volgende cursus waarin je het behaalt, versterkt het.',
+      `Opdrachten: ${opdrachten.bevestigd} bevestigd, ${opdrachten.zelf_gemeld} zelf gemeld, ${opdrachten.open} open.`,
     ],
   };
 }
-
-export type { Opdracht };

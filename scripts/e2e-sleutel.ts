@@ -9,5 +9,6 @@ import { maakSleutelpaar } from '../src/bewijscode/ondertekenen';
 const paar = await maakSleutelpaar();
 mkdirSync('test-uitvoer', { recursive: true });
 const publiek = ed.etc.bytesToHex(paar.publiekeSleutel);
-writeFileSync('test-uitvoer/e2e-publiek.json', JSON.stringify([{ nummer: 1, sleutel: publiek }]));
+// Nummer 250: los van echte sleutels (1-199) en de demo-sleutel (200).
+writeFileSync('test-uitvoer/e2e-publiek.json', JSON.stringify([{ nummer: 250, sleutel: publiek }]));
 writeFileSync('test-uitvoer/e2e-sleutel.json', JSON.stringify({ prive: ed.etc.bytesToHex(paar.priveSleutel), publiek }));

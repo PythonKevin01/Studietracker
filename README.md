@@ -1,7 +1,21 @@
 # Studietracker Mediavormgever (DEMO)
 
 Proefversie van een studentvolgsysteem voor de mbo-opleiding Mediavormgever (crebo 27110, kwalificatiedossier 23439).
-Alle opdrachten en koppelingen zijn verzonnen voor de demo.
+
+## Waar de gegevens vandaan komen
+
+| Wat | Bron | Echt of DEMO |
+| --- | --- | --- |
+| Kerntaken en werkprocessen | Kwalificatiedossier Mediavormgeving | echt |
+| 43 leerdoelen, met hun kerntaak | Leerdoelenlijst van de opleiding (`curriculum/bron/leerdoelen.yaml`) | echt |
+| Cursussen per jaar en periode, met hun leerdoelen | Cursusoverzicht (`curriculum/bron/cursussen.csv`, zonder docentkolom) | echt |
+| Opdrachten (per cursus een oefenopdracht G en een eindopdracht B) | verzonnen | DEMO |
+
+`curriculum/demo.yaml` wordt hieruit gemaakt met `npm run curriculum`. Opdrachtnummers blijven daarbij behouden.
+
+**Keten:** opdracht → leerdoel (in een cursus) → kerntaak. Een leerdoel is behaald in een cursus als de B-opdrachten ervoor bevestigd zijn.
+Hetzelfde leerdoel komt vaak in meer cursussen terug: behaald in één cursus is *behaald*, in meer cursussen is *versterkt*.
+Leerdoelen zijn niet vast aan een werkproces gekoppeld. Een werkproces krijgt alleen voortgang via het leerdoel dat dat werkproces zelf is (LD24 = B1-K1-W1 … LD43 = B1-K2-W3).
 
 **Dit is een ontwikkeloverzicht, geen examinering.**
 

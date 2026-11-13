@@ -1,81 +1,1746 @@
-# DEMO-curriculum voor de proef. Geen echt onderwijsprogramma.
+# GEGENEREERD door scripts/importeer-curriculum.ts (npm run curriculum). Niet met de hand wijzigen.
 #
-# Echt (aangeleverd door de opleiding): de titels van de werkprocessen en van
-# de vier leerdoelen.
-# Verzonnen voor de demo: het vak, de zes opdrachten, de niveaus en de
-# koppelingen tussen leerdoelen en werkprocessen.
-versie: 1
+# Echt (aangeleverd door de opleiding): kerntaken en werkprocessen (kwalificatiedossier),
+# de leerdoelen en welke cursus welke leerdoelen aanbiedt.
+# DEMO (verzonnen voor de proef): de opdrachten en hun niveaus.
+# Opdrachtnummers staan in uitgegeven bewijscodes: nooit wijzigen of hergebruiken.
+versie: 2
 demo: true
 opleiding:
   naam: Mediavormgever
   crebo: "27110"
   dossier: "23439"
-
 kerntaken:
   - id: B1-K1
     titel: Ontwerpt mediavormgeving
     werkprocessen:
-      - { id: B1-K1-W1, titel: Onderzoekt en ontwikkelt een creatief concept }
-      - { id: B1-K1-W2, titel: Presenteert en onderbouwt het creatief concept }
-      - { id: B1-K1-W3, titel: Experimenteert met en ontwikkelt de vormgeving }
-      - { id: B1-K1-W4, titel: Test en evalueert prototypes }
-      - { id: B1-K1-W5, titel: Realiseert en levert de vormgeving op }
+      - id: B1-K1-W1
+        titel: Onderzoekt en ontwikkelt een creatief concept
+      - id: B1-K1-W2
+        titel: Presenteert en onderbouwt het creatief concept
+      - id: B1-K1-W3
+        titel: Experimenteert met en ontwikkelt de vormgeving
+      - id: B1-K1-W4
+        titel: Test en evalueert prototypes
+      - id: B1-K1-W5
+        titel: Realiseert en levert de vormgeving op
   - id: B1-K2
     titel: Positioneert zich in de markt
     werkprocessen:
-      - { id: B1-K2-W1, titel: Stemt projectvoortgang rond opdrachten af }
-      - { id: B1-K2-W2, titel: Ontwikkelt en onderhoudt de eigen professionaliteit }
-      - { id: B1-K2-W3, titel: Profileert zich als mediavormgever }
-
-vakken:
-  - id: demo-vak
-    titel: DEMO-vak Visuele identiteit
+      - id: B1-K2-W1
+        titel: Stemt projectvoortgang rond opdrachten af
+      - id: B1-K2-W2
+        titel: Ontwikkelt en onderhoudt de eigen professionaliteit
+      - id: B1-K2-W3
+        titel: Profileert zich als mediavormgever
+leerdoelen:
+  - id: LD01
+    titel: Heeft specialistische kennis van mediavormgeving voor verschillende type media
+    kerntaken:
+      - B1-K1
+  - id: LD02
+    titel: Heeft kennis van storytelling
+    kerntaken:
+      - B1-K1
+  - id: LD03
+    titel: Heeft kennis van auteursrecht, licenties en ethische richtlijnen
+    kerntaken:
+      - B1-K1
+  - id: LD04
+    titel: Heeft kennis van marketing en communicatiebegrippen
+    kerntaken:
+      - B1-K1
+  - id: LD05
+    titel: Heeft specialistische kennis van software voor mediavormgeving
+    kerntaken:
+      - B1-K1
+  - id: LD06
+    titel: Heeft (technische) kennis van verschillende publicatie middelen in de media
+    kerntaken:
+      - B1-K1
+  - id: LD07
+    titel: Heeft specialistische kennis van bestandsformaten
+    kerntaken:
+      - B1-K1
+  - id: LD08
+    titel: Heeft specialistische kennis van vorm, kleur en typografie
+    kerntaken:
+      - B1-K1
+  - id: LD09
+    titel: Heeft kennis van (generatieve) AI
+    kerntaken:
+      - B1-K1
+  - id: LD10
+    titel: Heeft kennis van interactiedesign
+    kerntaken:
+      - B1-K1
+  - id: LD11
+    titel: Heeft kennis van vormen van gebruikerstesten (bijvoorbeeld enquêtes, prototyping en user testing)
+    kerntaken:
+      - B1-K1
+  - id: LD12
+    titel: Heeft specialistische kennis van ontwerpprincipes and -methodieken
+    kerntaken:
+      - B1-K1
+  - id: LD13
+    titel: Heeft specialistische kennis van trends en ontwikkelingen in de markt
+    kerntaken:
+      - B1-K1
+  - id: LD14
+    titel: Kan onderzoeksgegevens/data analyseren, interpreteren en er conclusies uit trekken
+    kerntaken:
+      - B1-K1
+  - id: LD15
+    titel: Kan een markt -en doelgroeponderzoek uitvoeren
+    kerntaken:
+      - B1-K1
+  - id: LD16
+    titel: Kan de vormgeving presenteren en onderbouwen
+    kerntaken:
+      - B1-K1
+  - id: LD17
+    titel: Kan gesprekken voeren met betrokkenen
+    kerntaken:
+      - B1-K1
+      - B1-K2
+  - id: LD18
+    titel: Kan feedback geven, ontvangen en verwerken
+    kerntaken:
+      - B1-K1
+  - id: LD19
+    titel: Kan layout en compositieregels toepassen
+    kerntaken:
+      - B1-K1
+  - id: LD20
+    titel: Kan de mediavormgeving op de vereiste mediaplatforms publiceren
+    kerntaken:
+      - B1-K1
+  - id: LD21
+    titel: Kan content beheren en archiveren
+    kerntaken:
+      - B1-K1
+  - id: LD22
+    titel: Kan met gebruiksvriendelijke (A.I.) toepassingen creatieve content maken en/of bewerken
+    kerntaken:
+      - B1-K1
+  - id: LD23
+    titel: Kan prompts formuleren, structureren en conditioneren
+    kerntaken:
+      - B1-K1
+  - id: LD24
+    titel: Onderzoekt en ontwikkelt een creatief concept
+    kerntaken:
+      - B1-K1
+    werkproces: B1-K1-W1
+  - id: LD25
+    titel: Presenteert en onderbouwt het creatief concept
+    kerntaken:
+      - B1-K1
+    werkproces: B1-K1-W2
+  - id: LD26
+    titel: Experimenteert met en ontwikkelt de vormgeving
+    kerntaken:
+      - B1-K1
+    werkproces: B1-K1-W3
+  - id: LD27
+    titel: Test en evalueert prototypes
+    kerntaken:
+      - B1-K1
+    werkproces: B1-K1-W4
+  - id: LD28
+    titel: Realiseert en levert de vormgeving op
+    kerntaken:
+      - B1-K1
+    werkproces: B1-K1-W5
+  - id: LD29
+    titel: Heeft kennis van projectmatige werkwijzen
+    kerntaken:
+      - B1-K2
+  - id: LD30
+    titel: Heeft kennis van de eigen drijfveren
+    kerntaken:
+      - B1-K2
+  - id: LD31
+    titel: Heeft kennis van marketing en branding van zichzelf
+    kerntaken:
+      - B1-K2
+  - id: LD32
+    titel: Heeft specialistische kennis van trends en ontwikkelingen in de markt
+    kerntaken:
+      - B1-K2
+  - id: LD33
+    titel: Heeft specialistische kennis van netwerken die relevant zijn voor mediavormgeving
+    kerntaken:
+      - B1-K2
+  - id: LD34
+    titel: Kan feedback geven, ontvangen en verwerken
+    kerntaken:
+      - B1-K2
+  - id: LD35
+    titel: Kan opdrachten op projectmatige wijze aanpakken
+    kerntaken:
+      - B1-K2
+  - id: LD36
+    titel: Kan diens uren/kosten begroten en verantwoorden
+    kerntaken:
+      - B1-K1
+      - B1-K2
+  - id: LD37
+    titel: Kan de eigen drijfveren en talenten laten zien
+    kerntaken:
+      - B1-K2
+  - id: LD38
+    titel: Kan een portfolio maken
+    kerntaken:
+      - B1-K2
+  - id: LD39
+    titel: Kan reflecteren op eigen kwaliteit en functioneren
+    kerntaken:
+      - B1-K2
+  - id: LD40
+    titel: Kan professioneel communiceren
+    kerntaken:
+      - B1-K2
+  - id: LD41
+    titel: Stemt projectvoortgang rond opdrachten af
+    kerntaken:
+      - B1-K2
+    werkproces: B1-K2-W1
+  - id: LD42
+    titel: Ontwikkelt en onderhoudt de eigen professionaliteit
+    kerntaken:
+      - B1-K2
+    werkproces: B1-K2-W2
+  - id: LD43
+    titel: Profileert zich als mediavormgever
+    kerntaken:
+      - B1-K2
+    werkproces: B1-K2-W3
+cursussen:
+  - id: p1-3d-en-game-art-01
+    titel: 3D & Game Art-01
+    jaar: 1
+    periode: 1
     leerdoelen:
-      - id: LD15
-        titel: Kan een markt- en doelgroeponderzoek uitvoeren
-        werkprocessen: [B1-K1-W1]
-      - id: LD17
-        titel: Kan gesprekken voeren met betrokkenen
-        werkprocessen: [B1-K1-W2, B1-K1-W4, B1-K2-W1]
-      - id: LD19
-        titel: Kan layout en compositieregels toepassen
-        werkprocessen: [B1-K1-W3, B1-K1-W5]
-      - id: LD38
-        titel: Kan een portfolio maken
-        werkprocessen: [B1-K2-W2, B1-K2-W3]
+      - LD05
+      - LD26
     opdrachten:
-      # 'nr' staat in de bewijscode. Nooit wijzigen of hergebruiken.
-      - id: demo-1
-        nr: 1
-        titel: "DEMO-opdracht 1: Doelgroep in beeld"
+      - id: p1-3d-en-game-art-01-oefenen
+        nr: 101
+        titel: DEMO-oefenopdracht
         leerdoelen:
-          - { leerdoel: LD15, niveau: O }
-      - id: demo-2
-        nr: 2
-        titel: "DEMO-opdracht 2: Mini-onderzoek"
+          - leerdoel: LD05
+            niveau: G
+          - leerdoel: LD26
+            niveau: G
+      - id: p1-3d-en-game-art-01-eindopdracht
+        nr: 102
+        titel: DEMO-eindopdracht
         leerdoelen:
-          - { leerdoel: LD15, niveau: G }
-          - { leerdoel: LD17, niveau: O }
-      - id: demo-3
-        nr: 3
-        titel: "DEMO-opdracht 3: Onderzoeksverslag met klantgesprek"
+          - leerdoel: LD05
+            niveau: B
+          - leerdoel: LD26
+            niveau: B
+  - id: p1-animation-en-design-01
+    titel: Animation & Design-01
+    jaar: 1
+    periode: 1
+    leerdoelen:
+      - LD34
+      - LD21
+    opdrachten:
+      - id: p1-animation-en-design-01-oefenen
+        nr: 103
+        titel: DEMO-oefenopdracht
         leerdoelen:
-          - { leerdoel: LD15, niveau: B }
-          - { leerdoel: LD17, niveau: G }
-      - id: demo-4
-        nr: 4
-        titel: "DEMO-opdracht 4: Posterreeks"
+          - leerdoel: LD34
+            niveau: G
+          - leerdoel: LD21
+            niveau: G
+      - id: p1-animation-en-design-01-eindopdracht
+        nr: 104
+        titel: DEMO-eindopdracht
         leerdoelen:
-          - { leerdoel: LD19, niveau: G }
-      - id: demo-5
-        nr: 5
-        titel: "DEMO-opdracht 5: Huisstijl opleveren"
+          - leerdoel: LD34
+            niveau: B
+          - leerdoel: LD21
+            niveau: B
+  - id: p1-computervaardigheden
+    titel: Computervaardigheden
+    jaar: 1
+    periode: 1
+    leerdoelen:
+      - LD03
+      - LD07
+    opdrachten:
+      - id: p1-computervaardigheden-oefenen
+        nr: 105
+        titel: DEMO-oefenopdracht
         leerdoelen:
-          - { leerdoel: LD19, niveau: B }
-          - { leerdoel: LD17, niveau: B }
-      - id: demo-6
-        nr: 6
-        titel: "DEMO-opdracht 6: Portfoliopagina"
+          - leerdoel: LD03
+            niveau: G
+          - leerdoel: LD07
+            niveau: G
+      - id: p1-computervaardigheden-eindopdracht
+        nr: 106
+        titel: DEMO-eindopdracht
         leerdoelen:
-          - { leerdoel: LD38, niveau: B }
-          - { leerdoel: LD19, niveau: G }
+          - leerdoel: LD03
+            niveau: B
+          - leerdoel: LD07
+            niveau: B
+  - id: p1-illustratie-01
+    titel: Illustratie-01
+    jaar: 1
+    periode: 1
+    leerdoelen:
+      - LD21
+      - LD05
+    opdrachten:
+      - id: p1-illustratie-01-oefenen
+        nr: 107
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD21
+            niveau: G
+          - leerdoel: LD05
+            niveau: G
+      - id: p1-illustratie-01-eindopdracht
+        nr: 108
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD21
+            niveau: B
+          - leerdoel: LD05
+            niveau: B
+  - id: p1-photoshop-01
+    titel: Photoshop-01
+    jaar: 1
+    periode: 1
+    leerdoelen:
+      - LD03
+      - LD19
+    opdrachten:
+      - id: p1-photoshop-01-oefenen
+        nr: 109
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD03
+            niveau: G
+          - leerdoel: LD19
+            niveau: G
+      - id: p1-photoshop-01-eindopdracht
+        nr: 110
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD03
+            niveau: B
+          - leerdoel: LD19
+            niveau: B
+  - id: p1-projectweek
+    titel: Projectweek
+    jaar: 1
+    periode: 1
+    leerdoelen:
+      - LD24
+      - LD28
+    opdrachten:
+      - id: p1-projectweek-oefenen
+        nr: 111
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD24
+            niveau: G
+          - leerdoel: LD28
+            niveau: G
+      - id: p1-projectweek-eindopdracht
+        nr: 112
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD24
+            niveau: B
+          - leerdoel: LD28
+            niveau: B
+  - id: p1-social-media-01
+    titel: Social Media-01
+    jaar: 1
+    periode: 1
+    leerdoelen:
+      - LD29
+      - LD20
+    opdrachten:
+      - id: p1-social-media-01-oefenen
+        nr: 113
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD29
+            niveau: G
+          - leerdoel: LD20
+            niveau: G
+      - id: p1-social-media-01-eindopdracht
+        nr: 114
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD29
+            niveau: B
+          - leerdoel: LD20
+            niveau: B
+  - id: p1-studiecoaching-01
+    titel: Studiecoaching 01
+    jaar: 1
+    periode: 1
+    leerdoelen:
+      - LD30
+      - LD39
+    opdrachten:
+      - id: p1-studiecoaching-01-oefenen
+        nr: 115
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD30
+            niveau: G
+          - leerdoel: LD39
+            niveau: G
+      - id: p1-studiecoaching-01-eindopdracht
+        nr: 116
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD30
+            niveau: B
+          - leerdoel: LD39
+            niveau: B
+  - id: p1-vormgeving-01
+    titel: Vormgeving-01
+    jaar: 1
+    periode: 1
+    leerdoelen:
+      - LD14
+      - LD08
+    opdrachten:
+      - id: p1-vormgeving-01-oefenen
+        nr: 117
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD14
+            niveau: G
+          - leerdoel: LD08
+            niveau: G
+      - id: p1-vormgeving-01-eindopdracht
+        nr: 118
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD14
+            niveau: B
+          - leerdoel: LD08
+            niveau: B
+  - id: p2-3d-en-game-art-02
+    titel: 3D & Game Art-02
+    jaar: 1
+    periode: 2
+    leerdoelen:
+      - LD01
+      - LD26
+    opdrachten:
+      - id: p2-3d-en-game-art-02-oefenen
+        nr: 119
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD01
+            niveau: G
+          - leerdoel: LD26
+            niveau: G
+      - id: p2-3d-en-game-art-02-eindopdracht
+        nr: 120
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD01
+            niveau: B
+          - leerdoel: LD26
+            niveau: B
+  - id: p2-animation-en-design-02
+    titel: Animation & Design-02
+    jaar: 1
+    periode: 2
+    leerdoelen:
+      - LD13
+      - LD05
+    opdrachten:
+      - id: p2-animation-en-design-02-oefenen
+        nr: 121
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD13
+            niveau: G
+          - leerdoel: LD05
+            niveau: G
+      - id: p2-animation-en-design-02-eindopdracht
+        nr: 122
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD13
+            niveau: B
+          - leerdoel: LD05
+            niveau: B
+  - id: p2-illustratie-02
+    titel: Illustratie-02
+    jaar: 1
+    periode: 2
+    leerdoelen:
+      - LD30
+      - LD13
+    opdrachten:
+      - id: p2-illustratie-02-oefenen
+        nr: 123
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD30
+            niveau: G
+          - leerdoel: LD13
+            niveau: G
+      - id: p2-illustratie-02-eindopdracht
+        nr: 124
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD30
+            niveau: B
+          - leerdoel: LD13
+            niveau: B
+  - id: p2-photoshop-02
+    titel: Photoshop-02
+    jaar: 1
+    periode: 2
+    leerdoelen:
+      - LD22
+      - LD07
+    opdrachten:
+      - id: p2-photoshop-02-oefenen
+        nr: 125
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD22
+            niveau: G
+          - leerdoel: LD07
+            niveau: G
+      - id: p2-photoshop-02-eindopdracht
+        nr: 126
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD22
+            niveau: B
+          - leerdoel: LD07
+            niveau: B
+  - id: p2-project-mv-01
+    titel: Project MV-01
+    jaar: 1
+    periode: 2
+    leerdoelen: []
+    opdrachten: []
+  - id: p2-projectweek
+    titel: Projectweek
+    jaar: 1
+    periode: 2
+    leerdoelen:
+      - LD24
+      - LD39
+    opdrachten:
+      - id: p2-projectweek-oefenen
+        nr: 127
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD24
+            niveau: G
+          - leerdoel: LD39
+            niveau: G
+      - id: p2-projectweek-eindopdracht
+        nr: 128
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD24
+            niveau: B
+          - leerdoel: LD39
+            niveau: B
+  - id: p2-social-media-02
+    titel: Social Media-02
+    jaar: 1
+    periode: 2
+    leerdoelen:
+      - LD21
+      - LD10
+    opdrachten:
+      - id: p2-social-media-02-oefenen
+        nr: 129
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD21
+            niveau: G
+          - leerdoel: LD10
+            niveau: G
+      - id: p2-social-media-02-eindopdracht
+        nr: 130
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD21
+            niveau: B
+          - leerdoel: LD10
+            niveau: B
+  - id: p2-studiecoaching-02
+    titel: Studiecoaching 02
+    jaar: 1
+    periode: 2
+    leerdoelen:
+      - LD37
+      - LD17
+    opdrachten:
+      - id: p2-studiecoaching-02-oefenen
+        nr: 131
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD37
+            niveau: G
+          - leerdoel: LD17
+            niveau: G
+      - id: p2-studiecoaching-02-eindopdracht
+        nr: 132
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD37
+            niveau: B
+          - leerdoel: LD17
+            niveau: B
+  - id: p2-vormgeving-02
+    titel: Vormgeving-02
+    jaar: 1
+    periode: 2
+    leerdoelen:
+      - LD19
+      - LD34
+    opdrachten:
+      - id: p2-vormgeving-02-oefenen
+        nr: 133
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD19
+            niveau: G
+          - leerdoel: LD34
+            niveau: G
+      - id: p2-vormgeving-02-eindopdracht
+        nr: 134
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD19
+            niveau: B
+          - leerdoel: LD34
+            niveau: B
+  - id: p3-after-effects-01
+    titel: After Effects-01
+    jaar: 1
+    periode: 3
+    leerdoelen:
+      - LD07
+      - LD05
+    opdrachten:
+      - id: p3-after-effects-01-oefenen
+        nr: 135
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD07
+            niveau: G
+          - leerdoel: LD05
+            niveau: G
+      - id: p3-after-effects-01-eindopdracht
+        nr: 136
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD07
+            niveau: B
+          - leerdoel: LD05
+            niveau: B
+  - id: p3-atelier-01
+    titel: Atelier-01
+    jaar: 1
+    periode: 3
+    leerdoelen:
+      - LD37
+      - LD17
+    opdrachten:
+      - id: p3-atelier-01-oefenen
+        nr: 137
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD37
+            niveau: G
+          - leerdoel: LD17
+            niveau: G
+      - id: p3-atelier-01-eindopdracht
+        nr: 138
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD37
+            niveau: B
+          - leerdoel: LD17
+            niveau: B
+  - id: p3-editing-01
+    titel: Editing-01
+    jaar: 1
+    periode: 3
+    leerdoelen:
+      - LD02
+      - LD07
+    opdrachten:
+      - id: p3-editing-01-oefenen
+        nr: 139
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD02
+            niveau: G
+          - leerdoel: LD07
+            niveau: G
+      - id: p3-editing-01-eindopdracht
+        nr: 140
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD02
+            niveau: B
+          - leerdoel: LD07
+            niveau: B
+  - id: p3-photoshop-03
+    titel: Photoshop-03
+    jaar: 1
+    periode: 3
+    leerdoelen:
+      - LD09
+      - LD23
+    opdrachten:
+      - id: p3-photoshop-03-oefenen
+        nr: 141
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD09
+            niveau: G
+          - leerdoel: LD23
+            niveau: G
+      - id: p3-photoshop-03-eindopdracht
+        nr: 142
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD09
+            niveau: B
+          - leerdoel: LD23
+            niveau: B
+  - id: p3-projectweek
+    titel: Projectweek
+    jaar: 1
+    periode: 3
+    leerdoelen:
+      - LD41
+      - LD42
+    opdrachten:
+      - id: p3-projectweek-oefenen
+        nr: 143
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD41
+            niveau: G
+          - leerdoel: LD42
+            niveau: G
+      - id: p3-projectweek-eindopdracht
+        nr: 144
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD41
+            niveau: B
+          - leerdoel: LD42
+            niveau: B
+  - id: p3-specialisatie-project-mv-01-motion-graphics-en-social-media
+    titel: Specialisatie Project MV-01 Motion Graphics & Social Media
+    jaar: 1
+    periode: 3
+    leerdoelen:
+      - LD02
+      - LD16
+      - LD11
+      - LD04
+    opdrachten:
+      - id: p3-specialisatie-project-mv-01-motion-graphics-en-social-media-oefenen
+        nr: 145
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD02
+            niveau: G
+          - leerdoel: LD16
+            niveau: G
+          - leerdoel: LD11
+            niveau: G
+          - leerdoel: LD04
+            niveau: G
+      - id: p3-specialisatie-project-mv-01-motion-graphics-en-social-media-eindopdracht
+        nr: 146
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD02
+            niveau: B
+          - leerdoel: LD16
+            niveau: B
+          - leerdoel: LD11
+            niveau: B
+          - leerdoel: LD04
+            niveau: B
+  - id: p3-specialisatie-project-mv-01-3d-en-game-art
+    titel: Specialisatie Project MV-01-3D & Game Art
+    jaar: 1
+    periode: 3
+    leerdoelen:
+      - LD28
+      - LD20
+    opdrachten:
+      - id: p3-specialisatie-project-mv-01-3d-en-game-art-oefenen
+        nr: 147
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD28
+            niveau: G
+          - leerdoel: LD20
+            niveau: G
+      - id: p3-specialisatie-project-mv-01-3d-en-game-art-eindopdracht
+        nr: 148
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD28
+            niveau: B
+          - leerdoel: LD20
+            niveau: B
+  - id: p3-stageorientatie-01
+    titel: Stageorientatie 01
+    jaar: 1
+    periode: 3
+    leerdoelen:
+      - LD31
+      - LD33
+    opdrachten:
+      - id: p3-stageorientatie-01-oefenen
+        nr: 149
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD31
+            niveau: G
+          - leerdoel: LD33
+            niveau: G
+      - id: p3-stageorientatie-01-eindopdracht
+        nr: 150
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD31
+            niveau: B
+          - leerdoel: LD33
+            niveau: B
+  - id: p3-vormgeving-03
+    titel: Vormgeving-03
+    jaar: 1
+    periode: 3
+    leerdoelen:
+      - LD26
+      - LD28
+    opdrachten:
+      - id: p3-vormgeving-03-oefenen
+        nr: 151
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD26
+            niveau: G
+          - leerdoel: LD28
+            niveau: G
+      - id: p3-vormgeving-03-eindopdracht
+        nr: 152
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD26
+            niveau: B
+          - leerdoel: LD28
+            niveau: B
+  - id: p3-zakelijk-engels-03
+    titel: Zakelijk Engels-03
+    jaar: 1
+    periode: 3
+    leerdoelen: []
+    opdrachten: []
+  - id: p4-after-effects-02
+    titel: After Effects-02
+    jaar: 1
+    periode: 4
+    leerdoelen:
+      - LD05
+      - LD12
+    opdrachten:
+      - id: p4-after-effects-02-oefenen
+        nr: 153
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD05
+            niveau: G
+          - leerdoel: LD12
+            niveau: G
+      - id: p4-after-effects-02-eindopdracht
+        nr: 154
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD05
+            niveau: B
+          - leerdoel: LD12
+            niveau: B
+  - id: p4-atelier-02
+    titel: Atelier-02
+    jaar: 1
+    periode: 4
+    leerdoelen:
+      - LD40
+      - LD08
+    opdrachten:
+      - id: p4-atelier-02-oefenen
+        nr: 155
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD40
+            niveau: G
+          - leerdoel: LD08
+            niveau: G
+      - id: p4-atelier-02-eindopdracht
+        nr: 156
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD40
+            niveau: B
+          - leerdoel: LD08
+            niveau: B
+  - id: p4-editing-02
+    titel: Editing-02
+    jaar: 1
+    periode: 4
+    leerdoelen:
+      - LD09
+      - LD18
+    opdrachten:
+      - id: p4-editing-02-oefenen
+        nr: 157
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD09
+            niveau: G
+          - leerdoel: LD18
+            niveau: G
+      - id: p4-editing-02-eindopdracht
+        nr: 158
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD09
+            niveau: B
+          - leerdoel: LD18
+            niveau: B
+  - id: p4-photoshop-04
+    titel: Photoshop-04
+    jaar: 1
+    periode: 4
+    leerdoelen:
+      - LD12
+      - LD06
+    opdrachten:
+      - id: p4-photoshop-04-oefenen
+        nr: 159
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD12
+            niveau: G
+          - leerdoel: LD06
+            niveau: G
+      - id: p4-photoshop-04-eindopdracht
+        nr: 160
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD12
+            niveau: B
+          - leerdoel: LD06
+            niveau: B
+  - id: p4-projectweek
+    titel: Projectweek
+    jaar: 1
+    periode: 4
+    leerdoelen:
+      - LD27
+      - LD28
+    opdrachten:
+      - id: p4-projectweek-oefenen
+        nr: 161
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD27
+            niveau: G
+          - leerdoel: LD28
+            niveau: G
+      - id: p4-projectweek-eindopdracht
+        nr: 162
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD27
+            niveau: B
+          - leerdoel: LD28
+            niveau: B
+  - id: p4-specialisatie-project-mv-01-motion-graphics-en-social-media
+    titel: Specialisatie Project MV-01 Motion Graphics & Social Media
+    jaar: 1
+    periode: 4
+    leerdoelen:
+      - LD35
+      - LD32
+      - LD01
+      - LD11
+    opdrachten:
+      - id: p4-specialisatie-project-mv-01-motion-graphics-en-social-media-oefenen
+        nr: 163
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD35
+            niveau: G
+          - leerdoel: LD32
+            niveau: G
+          - leerdoel: LD01
+            niveau: G
+          - leerdoel: LD11
+            niveau: G
+      - id: p4-specialisatie-project-mv-01-motion-graphics-en-social-media-eindopdracht
+        nr: 164
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD35
+            niveau: B
+          - leerdoel: LD32
+            niveau: B
+          - leerdoel: LD01
+            niveau: B
+          - leerdoel: LD11
+            niveau: B
+  - id: p4-specialisatie-project-mv-01-3d-en-game-art
+    titel: Specialisatie Project MV-01-3D & Game Art
+    jaar: 1
+    periode: 4
+    leerdoelen:
+      - LD02
+      - LD08
+    opdrachten:
+      - id: p4-specialisatie-project-mv-01-3d-en-game-art-oefenen
+        nr: 165
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD02
+            niveau: G
+          - leerdoel: LD08
+            niveau: G
+      - id: p4-specialisatie-project-mv-01-3d-en-game-art-eindopdracht
+        nr: 166
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD02
+            niveau: B
+          - leerdoel: LD08
+            niveau: B
+  - id: p4-stageorientatie-02
+    titel: Stageorientatie 02
+    jaar: 1
+    periode: 4
+    leerdoelen:
+      - LD38
+      - LD40
+    opdrachten:
+      - id: p4-stageorientatie-02-oefenen
+        nr: 167
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD38
+            niveau: G
+          - leerdoel: LD40
+            niveau: G
+      - id: p4-stageorientatie-02-eindopdracht
+        nr: 168
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD38
+            niveau: B
+          - leerdoel: LD40
+            niveau: B
+  - id: p4-vormgeving-04
+    titel: Vormgeving-04
+    jaar: 1
+    periode: 4
+    leerdoelen:
+      - LD26
+      - LD08
+    opdrachten:
+      - id: p4-vormgeving-04-oefenen
+        nr: 169
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD26
+            niveau: G
+          - leerdoel: LD08
+            niveau: G
+      - id: p4-vormgeving-04-eindopdracht
+        nr: 170
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD26
+            niveau: B
+          - leerdoel: LD08
+            niveau: B
+  - id: p7-art-en-design-01
+    titel: Art & Design-01
+    jaar: 2
+    periode: 7
+    leerdoelen:
+      - LD16
+      - LD27
+    opdrachten:
+      - id: p7-art-en-design-01-oefenen
+        nr: 171
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD16
+            niveau: G
+          - leerdoel: LD27
+            niveau: G
+      - id: p7-art-en-design-01-eindopdracht
+        nr: 172
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD16
+            niveau: B
+          - leerdoel: LD27
+            niveau: B
+  - id: p7-cinematografie-01
+    titel: Cinematografie-01
+    jaar: 2
+    periode: 7
+    leerdoelen:
+      - LD26
+      - LD28
+    opdrachten:
+      - id: p7-cinematografie-01-oefenen
+        nr: 173
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD26
+            niveau: G
+          - leerdoel: LD28
+            niveau: G
+      - id: p7-cinematografie-01-eindopdracht
+        nr: 174
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD26
+            niveau: B
+          - leerdoel: LD28
+            niveau: B
+  - id: p7-concepting-en-pitching-01
+    titel: Concepting & Pitching-01
+    jaar: 2
+    periode: 7
+    leerdoelen:
+      - LD24
+      - LD25
+    opdrachten:
+      - id: p7-concepting-en-pitching-01-oefenen
+        nr: 175
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD24
+            niveau: G
+          - leerdoel: LD25
+            niveau: G
+      - id: p7-concepting-en-pitching-01-eindopdracht
+        nr: 176
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD24
+            niveau: B
+          - leerdoel: LD25
+            niveau: B
+  - id: p7-kunstgeschiedenis
+    titel: Kunstgeschiedenis
+    jaar: 2
+    periode: 7
+    leerdoelen:
+      - LD22
+      - LD23
+    opdrachten:
+      - id: p7-kunstgeschiedenis-oefenen
+        nr: 177
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD22
+            niveau: G
+          - leerdoel: LD23
+            niveau: G
+      - id: p7-kunstgeschiedenis-eindopdracht
+        nr: 178
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD22
+            niveau: B
+          - leerdoel: LD23
+            niveau: B
+  - id: p7-kzdl-specialisatie-3d-en-game-art-01
+    titel: KZDL Specialisatie 3D & Game Art-01
+    jaar: 2
+    periode: 7
+    leerdoelen:
+      - LD24
+      - LD26
+    opdrachten:
+      - id: p7-kzdl-specialisatie-3d-en-game-art-01-oefenen
+        nr: 179
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD24
+            niveau: G
+          - leerdoel: LD26
+            niveau: G
+      - id: p7-kzdl-specialisatie-3d-en-game-art-01-eindopdracht
+        nr: 180
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD24
+            niveau: B
+          - leerdoel: LD26
+            niveau: B
+  - id: p7-kzdl-specialisatie-motion-graphic-en-social-designer-01
+    titel: KZDL Specialisatie Motion Graphic & Social Designer-01
+    jaar: 2
+    periode: 7
+    leerdoelen:
+      - LD02
+      - LD14
+    opdrachten:
+      - id: p7-kzdl-specialisatie-motion-graphic-en-social-designer-01-oefenen
+        nr: 181
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD02
+            niveau: G
+          - leerdoel: LD14
+            niveau: G
+      - id: p7-kzdl-specialisatie-motion-graphic-en-social-designer-01-eindopdracht
+        nr: 182
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD02
+            niveau: B
+          - leerdoel: LD14
+            niveau: B
+  - id: p7-marketing-01
+    titel: Marketing-01
+    jaar: 2
+    periode: 7
+    leerdoelen: []
+    opdrachten: []
+  - id: p7-na-het-mbo
+    titel: Na het MBO
+    jaar: 2
+    periode: 7
+    leerdoelen:
+      - LD30
+      - LD39
+    opdrachten:
+      - id: p7-na-het-mbo-oefenen
+        nr: 183
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD30
+            niveau: G
+          - leerdoel: LD39
+            niveau: G
+      - id: p7-na-het-mbo-eindopdracht
+        nr: 184
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD30
+            niveau: B
+          - leerdoel: LD39
+            niveau: B
+  - id: p7-studiecoaching-07
+    titel: Studiecoaching-07
+    jaar: 2
+    periode: 7
+    leerdoelen:
+      - LD30
+      - LD39
+    opdrachten:
+      - id: p7-studiecoaching-07-oefenen
+        nr: 185
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD30
+            niveau: G
+          - leerdoel: LD39
+            niveau: G
+      - id: p7-studiecoaching-07-eindopdracht
+        nr: 186
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD30
+            niveau: B
+          - leerdoel: LD39
+            niveau: B
+  - id: p7-vormgeving-05
+    titel: Vormgeving-05
+    jaar: 2
+    periode: 7
+    leerdoelen: []
+    opdrachten: []
+  - id: p8-art-en-design-02
+    titel: Art&Design-02
+    jaar: 2
+    periode: 8
+    leerdoelen: []
+    opdrachten: []
+  - id: p8-cinematografie-02
+    titel: Cinematografie-02
+    jaar: 2
+    periode: 8
+    leerdoelen: []
+    opdrachten: []
+  - id: p8-internationaal-samenwerkingsproject-01
+    titel: Internationaal Samenwerkingsproject-01
+    jaar: 2
+    periode: 8
+    leerdoelen:
+      - LD20
+      - LD17
+    opdrachten:
+      - id: p8-internationaal-samenwerkingsproject-01-oefenen
+        nr: 187
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD20
+            niveau: G
+          - leerdoel: LD17
+            niveau: G
+      - id: p8-internationaal-samenwerkingsproject-01-eindopdracht
+        nr: 188
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD20
+            niveau: B
+          - leerdoel: LD17
+            niveau: B
+  - id: p8-kzdl-specialisatie-examen-3d-en-game-art-01
+    titel: KZDL Specialisatie Examen 3D & Game Art-01
+    jaar: 2
+    periode: 8
+    leerdoelen:
+      - LD25
+      - LD29
+    opdrachten:
+      - id: p8-kzdl-specialisatie-examen-3d-en-game-art-01-oefenen
+        nr: 189
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD25
+            niveau: G
+          - leerdoel: LD29
+            niveau: G
+      - id: p8-kzdl-specialisatie-examen-3d-en-game-art-01-eindopdracht
+        nr: 190
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD25
+            niveau: B
+          - leerdoel: LD29
+            niveau: B
+  - id: p8-kzdl-specialisatie-examen-social-en-motion-graphics-0-1
+    titel: KZDL Specialisatie Examen Social & Motion Graphics-0.1
+    jaar: 2
+    periode: 8
+    leerdoelen:
+      - LD27
+      - LD17
+    opdrachten:
+      - id: p8-kzdl-specialisatie-examen-social-en-motion-graphics-0-1-oefenen
+        nr: 191
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD27
+            niveau: G
+          - leerdoel: LD17
+            niveau: G
+      - id: p8-kzdl-specialisatie-examen-social-en-motion-graphics-0-1-eindopdracht
+        nr: 192
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD27
+            niveau: B
+          - leerdoel: LD17
+            niveau: B
+  - id: p8-projectdag-mv-01
+    titel: Projectdag MV-01
+    jaar: 2
+    periode: 8
+    leerdoelen:
+      - LD18
+      - LD35
+    opdrachten:
+      - id: p8-projectdag-mv-01-oefenen
+        nr: 193
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD18
+            niveau: G
+          - leerdoel: LD35
+            niveau: G
+      - id: p8-projectdag-mv-01-eindopdracht
+        nr: 194
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD18
+            niveau: B
+          - leerdoel: LD35
+            niveau: B
+  - id: p8-studiecoaching-08
+    titel: Studiecoaching-08
+    jaar: 2
+    periode: 8
+    leerdoelen:
+      - LD30
+      - LD39
+    opdrachten:
+      - id: p8-studiecoaching-08-oefenen
+        nr: 195
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD30
+            niveau: G
+          - leerdoel: LD39
+            niveau: G
+      - id: p8-studiecoaching-08-eindopdracht
+        nr: 196
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD30
+            niveau: B
+          - leerdoel: LD39
+            niveau: B
+  - id: p8-vormgeving-06
+    titel: Vormgeving-06
+    jaar: 2
+    periode: 8
+    leerdoelen: []
+    opdrachten: []
+  - id: p8-zakelijk-engels-02
+    titel: Zakelijk Engels-02
+    jaar: 2
+    periode: 8
+    leerdoelen:
+      - LD13
+      - LD16
+    opdrachten:
+      - id: p8-zakelijk-engels-02-oefenen
+        nr: 197
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD13
+            niveau: G
+          - leerdoel: LD16
+            niveau: G
+      - id: p8-zakelijk-engels-02-eindopdracht
+        nr: 198
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD13
+            niveau: B
+          - leerdoel: LD16
+            niveau: B
+  - id: p9-kzd-corporate-design-01
+    titel: KZD Corporate Design-01
+    jaar: 3
+    periode: 9
+    leerdoelen:
+      - LD15
+      - LD35
+    opdrachten:
+      - id: p9-kzd-corporate-design-01-oefenen
+        nr: 199
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD15
+            niveau: G
+          - leerdoel: LD35
+            niveau: G
+      - id: p9-kzd-corporate-design-01-eindopdracht
+        nr: 200
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD15
+            niveau: B
+          - leerdoel: LD35
+            niveau: B
+  - id: p9-ondernemingsvaardigheden
+    titel: Ondernemingsvaardigheden
+    jaar: 3
+    periode: 9
+    leerdoelen:
+      - LD33
+      - LD36
+    opdrachten:
+      - id: p9-ondernemingsvaardigheden-oefenen
+        nr: 201
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD33
+            niveau: G
+          - leerdoel: LD36
+            niveau: G
+      - id: p9-ondernemingsvaardigheden-eindopdracht
+        nr: 202
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD33
+            niveau: B
+          - leerdoel: LD36
+            niveau: B
+  - id: p9-portfolio-builder-01
+    titel: Portfolio Builder-01
+    jaar: 3
+    periode: 9
+    leerdoelen:
+      - LD38
+      - LD39
+    opdrachten:
+      - id: p9-portfolio-builder-01-oefenen
+        nr: 203
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD38
+            niveau: G
+          - leerdoel: LD39
+            niveau: G
+      - id: p9-portfolio-builder-01-eindopdracht
+        nr: 204
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD38
+            niveau: B
+          - leerdoel: LD39
+            niveau: B
+  - id: p9-portfolio-opdracht-3d
+    titel: Portfolio opdracht 3d
+    jaar: 3
+    periode: 9
+    leerdoelen:
+      - LD12
+      - LD37
+    opdrachten:
+      - id: p9-portfolio-opdracht-3d-oefenen
+        nr: 205
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD12
+            niveau: G
+          - leerdoel: LD37
+            niveau: G
+      - id: p9-portfolio-opdracht-3d-eindopdracht
+        nr: 206
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD12
+            niveau: B
+          - leerdoel: LD37
+            niveau: B
+  - id: p9-portfolio-opdracht-motion-graphics
+    titel: Portfolio opdracht Motion Graphics
+    jaar: 3
+    periode: 9
+    leerdoelen:
+      - LD35
+      - LD28
+    opdrachten:
+      - id: p9-portfolio-opdracht-motion-graphics-oefenen
+        nr: 207
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD35
+            niveau: G
+          - leerdoel: LD28
+            niveau: G
+      - id: p9-portfolio-opdracht-motion-graphics-eindopdracht
+        nr: 208
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD35
+            niveau: B
+          - leerdoel: LD28
+            niveau: B
+  - id: p9-portfolio-weekstart
+    titel: Portfolio Weekstart
+    jaar: 3
+    periode: 9
+    leerdoelen:
+      - LD27
+      - LD28
+    opdrachten:
+      - id: p9-portfolio-weekstart-oefenen
+        nr: 209
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD27
+            niveau: G
+          - leerdoel: LD28
+            niveau: G
+      - id: p9-portfolio-weekstart-eindopdracht
+        nr: 210
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD27
+            niveau: B
+          - leerdoel: LD28
+            niveau: B
+  - id: p9-stage-orientatie
+    titel: Stage Oriëntatie
+    jaar: 3
+    periode: 9
+    leerdoelen:
+      - LD43
+      - LD39
+    opdrachten:
+      - id: p9-stage-orientatie-oefenen
+        nr: 211
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD43
+            niveau: G
+          - leerdoel: LD39
+            niveau: G
+      - id: p9-stage-orientatie-eindopdracht
+        nr: 212
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD43
+            niveau: B
+          - leerdoel: LD39
+            niveau: B
+  - id: p9-stage-orientatie-03
+    titel: Stage Orientatie-03
+    jaar: 3
+    periode: 9
+    leerdoelen: []
+    opdrachten: []
+  - id: p10-beroepsbeeld-01
+    titel: Beroepsbeeld-01
+    jaar: 3
+    periode: 10
+    leerdoelen:
+      - LD32
+      - LD33
+    opdrachten:
+      - id: p10-beroepsbeeld-01-oefenen
+        nr: 213
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD32
+            niveau: G
+          - leerdoel: LD33
+            niveau: G
+      - id: p10-beroepsbeeld-01-eindopdracht
+        nr: 214
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD32
+            niveau: B
+          - leerdoel: LD33
+            niveau: B
+  - id: p10-kzd-corporate-design-02
+    titel: KZD Corporate Design-02
+    jaar: 3
+    periode: 10
+    leerdoelen:
+      - LD16
+      - LD09
+    opdrachten:
+      - id: p10-kzd-corporate-design-02-oefenen
+        nr: 215
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD16
+            niveau: G
+          - leerdoel: LD09
+            niveau: G
+      - id: p10-kzd-corporate-design-02-eindopdracht
+        nr: 216
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD16
+            niveau: B
+          - leerdoel: LD09
+            niveau: B
+  - id: p10-pre-expo-projects
+    titel: Pre-Expo Projects
+    jaar: 3
+    periode: 10
+    leerdoelen:
+      - LD41
+    opdrachten:
+      - id: p10-pre-expo-projects-oefenen
+        nr: 217
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD41
+            niveau: G
+      - id: p10-pre-expo-projects-eindopdracht
+        nr: 218
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD41
+            niveau: B
+  - id: p10-sluitstuk-3d-designer
+    titel: Sluitstuk 3D Designer
+    jaar: 3
+    periode: 10
+    leerdoelen:
+      - LD27
+      - LD42
+    opdrachten:
+      - id: p10-sluitstuk-3d-designer-oefenen
+        nr: 219
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD27
+            niveau: G
+          - leerdoel: LD42
+            niveau: G
+      - id: p10-sluitstuk-3d-designer-eindopdracht
+        nr: 220
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD27
+            niveau: B
+          - leerdoel: LD42
+            niveau: B
+  - id: p10-sluitstuk-motion-graphic-designer
+    titel: Sluitstuk Motion Graphic Designer
+    jaar: 3
+    periode: 10
+    leerdoelen:
+      - LD41
+      - LD43
+    opdrachten:
+      - id: p10-sluitstuk-motion-graphic-designer-oefenen
+        nr: 221
+        titel: DEMO-oefenopdracht
+        leerdoelen:
+          - leerdoel: LD41
+            niveau: G
+          - leerdoel: LD43
+            niveau: G
+      - id: p10-sluitstuk-motion-graphic-designer-eindopdracht
+        nr: 222
+        titel: DEMO-eindopdracht
+        leerdoelen:
+          - leerdoel: LD41
+            niveau: B
+          - leerdoel: LD43
+            niveau: B
