@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { NIVEAUS } from '../../curriculum/schema';
-import { curriculum, leesbareDatum, opdrachtOpId } from '../../gedeeld/curriculum';
+import { curriculum, leesbareDatum, opdrachtOpId, volledigeOpdrachtNaam } from '../../gedeeld/curriculum';
 import { Kaart, Kop, LeerdoelStatusLabel, Melding, hoofdknop, tweedeKnop } from '../../gedeeld/onderdelen';
-import { NIVEAU_LABEL, kerntaakUitkomst, vakUitkomst } from '../../rekenregels';
+import { NIVEAU_LABEL, kerntaakUitkomst, leerdoelTotaal } from '../../rekenregels';
 import type { SchermProps } from '../App';
 import { backupNodig, exportBestandsnaam, maakExport, oordelen, voortgangVan } from '../gegevens';
 import { wisAlles } from '../opslag';
@@ -93,31 +93,34 @@ function Overzicht({ gegevens }: Pick<SchermProps, 'gegevens'>) {
         {gegevens.studentnummer} · gemaakt op {leesbareDatum(new Date().toISOString())} · DEMO
       </p>
 
-      {curriculum.vakken.map((vak) => {
-        const u = vakUitkomst(curriculum, vak.id, voortgang);
-        return (
-          <div key={vak.id} className="mt-4 overflow-x-auto">
-            <table className="w-full border-collapse bg-white text-sm">
-              <caption className="pb-1 text-left font-semibold">{vak.titel}: leerdoelen</caption>
-              <thead>
-                <tr><th scope="col" className={cel}>Leerdoel</th><th scope="col" className={cel}>Status</th></tr>
-              </thead>
-              <tbody>
-                {u.leerdoelen.map((l) => (
-                  <tr key={l.leerdoelId}>
-                    <td className={cel}>{l.leerdoelId} {l.titel}</td>
-                    <td className={cel}><LeerdoelStatusLabel status={l.status} /></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        );
-      })}
-
-      <div className="mt-4 overflow-x-auto">
+      <div className="mt-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabel; schuif opzij voor meer kolommen">
         <table className="w-full border-collapse bg-white text-sm">
-          <caption className="pb-1 text-left font-semibold">Werkprocessen: bevestigd / zelf gemeld / totaal per niveau</caption>
+          <caption className="pb-1 text-left font-semibold">Leerdoelen</caption>
+          <thead>
+            <tr>
+              <th scope="col" className={cel}>Leerdoel</th>
+              <th scope="col" className={cel}>Status</th>
+              <th scope="col" className={cel}>Behaald in</th>
+            </tr>
+          </thead>
+          <tbody>
+            {curriculum.leerdoelen.map((ld) => {
+              const t = leerdoelTotaal(curriculum, ld.id, voortgang);
+              return (
+                <tr key={ld.id}>
+                  <th scope="row" className={`${cel} font-normal`}>{ld.id} {ld.titel}</th>
+                  <td className={cel}><LeerdoelStatusLabel status={t.status} behaaldIn={t.behaaldIn} /></td>
+                  <td className={`${cel} tabular-nums whitespace-nowrap`}>{t.behaaldIn} van {t.perCursus.length}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="mt-4 overflow-x-auto" tabIndex={0} role="region" aria-label="Tabel; schuif opzij voor meer kolommen">
+        <table className="w-full border-collapse bg-white text-sm">
+          <caption className="pb-1 text-left font-semibold">Werkprocessen (via het eigen leerdoel): bevestigd / zelf gemeld / totaal per niveau</caption>
           <thead>
             <tr>
               <th scope="col" className={cel}>Werkproces</th>
@@ -151,7 +154,7 @@ function Overzicht({ gegevens }: Pick<SchermProps, 'gegevens'>) {
         <ul className="mt-1 list-disc pl-5 text-sm">
           {bevestigd.map((o) => (
             <li key={o.opdrachtId}>
-              {opdrachtOpId.get(o.opdrachtId)?.titel}: bevestigd op {leesbareDatum(o.datum)} (sleutel {o.sleutelnummer})
+              {volledigeOpdrachtNaam(opdrachtOpId.get(o.opdrachtId)!)}: bevestigd op {leesbareDatum(o.datum)} (sleutel {o.sleutelnummer})
             </li>
           ))}
         </ul>

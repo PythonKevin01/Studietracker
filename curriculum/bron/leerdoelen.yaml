@@ -1,6 +1,5 @@
-# Volledige lijst leerdoelen zoals aangeleverd door de opleiding (schermafbeeldingen).
-# Naslag: de app gebruikt dit bestand niet. De demo gebruikt er vier (LD15, LD17, LD19, LD38).
-# LD24-LD28 en LD41-LD43 zijn in de bron de werkprocessen zelf.
+# Leerdoelen zoals aangeleverd door de opleiding (schermafbeeldingen).
+# Bron voor scripts/importeer-curriculum.ts. LD24-LD28 en LD41-LD43 zijn de werkprocessen zelf.
 - { id: LD01, kerntaak: [K1], titel: "heeft specialistische kennis van mediavormgeving voor verschillende type media" }
 - { id: LD02, kerntaak: [K1], titel: "heeft kennis van storytelling" }
 - { id: LD03, kerntaak: [K1], titel: "heeft kennis van auteursrecht, licenties en ethische richtlijnen" }

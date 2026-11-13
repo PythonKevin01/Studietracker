@@ -19,6 +19,9 @@ import { keurWachtwoordzin, ontgrendelSleutel, versleutelSleutel } from '../src/
 import { leesPubliekeSleutels } from '../src/bewijscode/sleutels';
 
 const DEMO_WACHTWOORDZIN = 'alleen voor de demo, nooit echt gebruiken';
+/** Sleutelnummers: 1-199 echte sleutels, 200 demo, 250 schermtests. */
+const DEMO_NUMMER = 200;
+const MAX_ECHT = 199;
 const DEMO_PRIVE = 'keys/demo-docent.sleutel.json';
 const DEMO_PUBLIEK = 'keys/publieke-sleutels.lokaal.json';
 const PUBLIEK = 'keys/publieke-sleutels.json';
@@ -45,23 +48,24 @@ async function vraagGeheim(vraag: string): Promise<string> {
 }
 
 async function demoSleutel(alsNodig: boolean) {
-  if (alsNodig && existsSync(DEMO_PUBLIEK) && existsSync(DEMO_PRIVE)) {
+  const huidig = existsSync(DEMO_PUBLIEK) ? (JSON.parse(readFileSync(DEMO_PUBLIEK, 'utf8')) as { nummer: number }[]) : [];
+  if (alsNodig && existsSync(DEMO_PRIVE) && huidig.every((s) => s.nummer === DEMO_NUMMER) && huidig.length === 1) {
     console.log(`Demo-sleutel bestaat al (${DEMO_PRIVE}).`);
     return;
   }
   mkdirSync('keys', { recursive: true });
   const paar = await maakSleutelpaar();
-  const bestand = await versleutelSleutel(paar.priveSleutel, 1, DEMO_WACHTWOORDZIN);
+  const bestand = await versleutelSleutel(paar.priveSleutel, DEMO_NUMMER, DEMO_WACHTWOORDZIN);
   writeFileSync(DEMO_PRIVE, JSON.stringify(bestand, null, 2) + '\n');
-  writeFileSync(DEMO_PUBLIEK, JSON.stringify([{ nummer: 1, sleutel: bestand.publiekeSleutel, omschrijving: 'DEMO-sleutel' }], null, 2) + '\n');
+  writeFileSync(DEMO_PUBLIEK, JSON.stringify([{ nummer: DEMO_NUMMER, sleutel: bestand.publiekeSleutel, omschrijving: 'DEMO-sleutel' }], null, 2) + '\n');
   console.log(`Demo-sleutel gemaakt (${DEMO_PRIVE}). Alleen voor lokaal testen; de wachtwoordzin staat in dit script.`);
 }
 
 async function nieuweSleutel() {
   const bestaand = existsSync(PUBLIEK) ? (JSON.parse(readFileSync(PUBLIEK, 'utf8')) as { nummer: number; sleutel: string; omschrijving?: string }[]) : [];
   leesPubliekeSleutels(bestaand);
-  const nummer = Math.max(0, ...bestaand.map((s) => s.nummer)) + 1;
-  if (nummer > 255) throw new Error('Alle sleutelnummers zijn gebruikt.');
+  const nummer = Math.max(0, ...bestaand.map((s) => s.nummer).filter((n) => n <= MAX_ECHT)) + 1;
+  if (nummer > MAX_ECHT) throw new Error(`Alle sleutelnummers (1-${MAX_ECHT}) zijn gebruikt.`);
 
   console.log(`Nieuwe sleutel, nummer ${nummer}.`);
   const zin = await vraagGeheim('Kies een wachtwoordzin (minstens 16 tekens): ');

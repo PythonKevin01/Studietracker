@@ -17,10 +17,16 @@ const kerntaakSchema = z.strictObject({
   werkprocessen: z.array(werkprocesSchema).min(1),
 });
 
+/**
+ * Leerdoel uit de lijst van de opleiding. Hangt aan één of meer kerntaken
+ * (zoals in het kwalificatiedossier). Een paar leerdoelen zijn een werkproces
+ * zelf; alleen die hebben `werkproces`.
+ */
 const leerdoelSchema = z.strictObject({
-  id: tekst,
+  id: z.string().regex(/^LD\d+$/, 'Leerdoel-id moet de vorm LD01 hebben'),
   titel: tekst,
-  werkprocessen: z.array(tekst).min(1),
+  kerntaken: z.array(tekst).min(1),
+  werkproces: tekst.optional(),
 });
 
 const koppelingSchema = z.strictObject({
@@ -30,33 +36,37 @@ const koppelingSchema = z.strictObject({
 
 const opdrachtSchema = z.strictObject({
   id: tekst,
-  /** Vast nummer dat in de bewijscode staat (2 bytes). Nooit hergebruiken. */
+  /** Vast nummer dat in de bewijscode staat (2 bytes). Nooit wijzigen of hergebruiken. */
   nr: z.number().int().min(1).max(65535),
   titel: tekst,
   leerdoelen: z.array(koppelingSchema).min(1),
 });
 
-const vakSchema = z.strictObject({
+const cursusSchema = z.strictObject({
   id: tekst,
   titel: tekst,
-  leerdoelen: z.array(leerdoelSchema).min(1),
-  opdrachten: z.array(opdrachtSchema).min(1),
+  jaar: z.number().int().min(1),
+  periode: z.number().int().min(1),
+  /** Leerdoelen die in deze cursus worden aangeboden. Mag leeg zijn. */
+  leerdoelen: z.array(tekst),
+  opdrachten: z.array(opdrachtSchema),
 });
 
 const curriculumSchema = z.strictObject({
   versie: z.number().int().min(1),
-  /** De proef werkt alleen met demo-gegevens; de interface toont dit overal. */
+  /** De proef werkt met demo-opdrachten; de interface toont dit overal. */
   demo: z.literal(true),
   opleiding: z.strictObject({ naam: tekst, crebo: tekst, dossier: tekst }),
   kerntaken: z.array(kerntaakSchema).min(1),
-  vakken: z.array(vakSchema).min(1),
+  leerdoelen: z.array(leerdoelSchema).min(1),
+  cursussen: z.array(cursusSchema).min(1),
 });
 
 export type Curriculum = z.infer<typeof curriculumSchema>;
 export type Kerntaak = z.infer<typeof kerntaakSchema>;
 export type Werkproces = z.infer<typeof werkprocesSchema>;
-export type Vak = z.infer<typeof vakSchema>;
 export type Leerdoel = z.infer<typeof leerdoelSchema>;
+export type Cursus = z.infer<typeof cursusSchema>;
 export type Opdracht = z.infer<typeof opdrachtSchema>;
 
 export class CurriculumFout extends Error {
@@ -80,51 +90,51 @@ function dubbelen(waarden: readonly (string | number)[]): (string | number)[] {
 export function leesCurriculum(ruw: unknown): Curriculum {
   const resultaat = curriculumSchema.safeParse(ruw);
   if (!resultaat.success) {
-    throw new CurriculumFout(
-      resultaat.error.issues.map((i) => `${i.path.join('.') || '(hoofdniveau)'}: ${i.message}`),
-    );
+    throw new CurriculumFout(resultaat.error.issues.map((i) => `${i.path.join('.') || '(hoofdniveau)'}: ${i.message}`));
   }
   const c = resultaat.data;
   const problemen: string[] = [];
 
-  const werkprocesIds = c.kerntaken.flatMap((k) => k.werkprocessen.map((w) => w.id));
+  const kerntaakIds = new Set(c.kerntaken.map((k) => k.id));
+  const werkprocesNaarKerntaak = new Map(c.kerntaken.flatMap((k) => k.werkprocessen.map((w) => [w.id, k.id] as const)));
   for (const d of dubbelen(c.kerntaken.map((k) => k.id))) problemen.push(`Kerntaak ${d} komt dubbel voor`);
-  for (const d of dubbelen(werkprocesIds)) problemen.push(`Werkproces ${d} komt dubbel voor`);
+  for (const d of dubbelen(c.kerntaken.flatMap((k) => k.werkprocessen.map((w) => w.id)))) problemen.push(`Werkproces ${d} komt dubbel voor`);
   for (const k of c.kerntaken) {
     for (const w of k.werkprocessen) {
       if (!w.id.startsWith(`${k.id}-`)) problemen.push(`Werkproces ${w.id} hoort niet bij kerntaak ${k.id}`);
     }
   }
 
-  const alleOpdrachten = c.vakken.flatMap((v) => v.opdrachten);
-  for (const d of dubbelen(c.vakken.map((v) => v.id))) problemen.push(`Vak ${d} komt dubbel voor`);
-  for (const d of dubbelen(c.vakken.flatMap((v) => v.leerdoelen.map((l) => l.id)))) {
-    problemen.push(`Leerdoel ${d} komt dubbel voor`);
+  for (const d of dubbelen(c.leerdoelen.map((l) => l.id))) problemen.push(`Leerdoel ${d} komt dubbel voor`);
+  for (const l of c.leerdoelen) {
+    for (const k of l.kerntaken) if (!kerntaakIds.has(k)) problemen.push(`Leerdoel ${l.id} verwijst naar onbekende kerntaak ${k}`);
+    if (l.werkproces !== undefined) {
+      const kt = werkprocesNaarKerntaak.get(l.werkproces);
+      if (!kt) problemen.push(`Leerdoel ${l.id} verwijst naar onbekend werkproces ${l.werkproces}`);
+      else if (!l.kerntaken.includes(kt)) problemen.push(`Leerdoel ${l.id}: werkproces ${l.werkproces} hoort niet bij zijn kerntaak`);
+    }
   }
+
+  const leerdoelIds = new Set(c.leerdoelen.map((l) => l.id));
+  const alleOpdrachten = c.cursussen.flatMap((v) => v.opdrachten);
+  for (const d of dubbelen(c.cursussen.map((v) => v.id))) problemen.push(`Cursus ${d} komt dubbel voor`);
   for (const d of dubbelen(alleOpdrachten.map((o) => o.id))) problemen.push(`Opdracht ${d} komt dubbel voor`);
   for (const d of dubbelen(alleOpdrachten.map((o) => o.nr))) problemen.push(`Opdrachtnummer ${d} komt dubbel voor`);
 
-  const bekendeWerkprocessen = new Set(werkprocesIds);
-  for (const vak of c.vakken) {
-    const leerdoelIds = new Set(vak.leerdoelen.map((l) => l.id));
-    for (const l of vak.leerdoelen) {
-      for (const w of l.werkprocessen) {
-        if (!bekendeWerkprocessen.has(w)) problemen.push(`Leerdoel ${l.id} verwijst naar onbekend werkproces ${w}`);
-      }
-      for (const d of dubbelen(l.werkprocessen)) problemen.push(`Leerdoel ${l.id} noemt werkproces ${d} dubbel`);
-      // Zonder B-opdracht zou een leerdoel direct "behaald" zijn.
-      const heeftB = vak.opdrachten.some((o) => o.leerdoelen.some((k) => k.leerdoel === l.id && k.niveau === 'B'));
-      if (!heeftB) problemen.push(`Leerdoel ${l.id} heeft geen opdracht op niveau B (beoordeeld)`);
+  for (const cursus of c.cursussen) {
+    for (const d of dubbelen(cursus.leerdoelen)) problemen.push(`Cursus ${cursus.id} noemt leerdoel ${d} dubbel`);
+    const aangeboden = new Set(cursus.leerdoelen);
+    for (const l of cursus.leerdoelen) {
+      if (!leerdoelIds.has(l)) problemen.push(`Cursus ${cursus.id} verwijst naar onbekend leerdoel ${l}`);
+      // Zonder B-opdracht zou een leerdoel in deze cursus direct "behaald" zijn.
+      const heeftB = cursus.opdrachten.some((o) => o.leerdoelen.some((k) => k.leerdoel === l && k.niveau === 'B'));
+      if (!heeftB) problemen.push(`Cursus ${cursus.id}: leerdoel ${l} heeft geen opdracht op niveau B (beoordeeld)`);
     }
-    for (const o of vak.opdrachten) {
+    for (const o of cursus.opdrachten) {
       for (const k of o.leerdoelen) {
-        if (!leerdoelIds.has(k.leerdoel)) {
-          problemen.push(`Opdracht ${o.id} verwijst naar leerdoel ${k.leerdoel} dat niet in vak ${vak.id} staat`);
-        }
+        if (!aangeboden.has(k.leerdoel)) problemen.push(`Opdracht ${o.id} verwijst naar leerdoel ${k.leerdoel} dat cursus ${cursus.id} niet aanbiedt`);
       }
-      for (const d of dubbelen(o.leerdoelen.map((k) => k.leerdoel))) {
-        problemen.push(`Opdracht ${o.id} noemt leerdoel ${d} dubbel`);
-      }
+      for (const d of dubbelen(o.leerdoelen.map((k) => k.leerdoel))) problemen.push(`Opdracht ${o.id} noemt leerdoel ${d} dubbel`);
     }
   }
 
@@ -133,7 +143,7 @@ export function leesCurriculum(ruw: unknown): Curriculum {
 }
 
 export function alleOpdrachten(c: Curriculum): Opdracht[] {
-  return c.vakken.flatMap((v) => v.opdrachten);
+  return c.cursussen.flatMap((v) => v.opdrachten);
 }
 
 export function alleWerkprocessen(c: Curriculum): Werkproces[] {
